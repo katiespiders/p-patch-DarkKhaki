@@ -1,0 +1,2 @@
+class SharedItemsController < ApplicationController
+end
