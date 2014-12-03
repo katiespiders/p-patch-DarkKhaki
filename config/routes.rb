@@ -1,12 +1,25 @@
 Rails.application.routes.draw do
 
-  root 'pages#about'
+  root  'pages#about'
 
-  get '/admin',         to: 'users#admin',            as: :admin
+######### SESSIONS ROUTES
+  get     'sessions/new',     to: "sessions#new",     as: :new_session
+  post    'sessions/new',     to: "sessions#create"
+  delete  'sessions',         to: "sessions#destroy", as: :session
 
+######### USERS ROUTES
+  get     'users/new',        to: "users#new",        as: :new_user
+  post    'users/new',        to: "users#create"
+  get     'users/:id',        to: "users#show",       as: :user
+  get     'users/:id/edit',   to: "users#edit",       as: :edit_user
+  patch   'users/:id/',       to: "users#update"
+  delete  'users/:id',        to: "users#destroy"
+  get '/admin',               to: 'users#admin',            as: :admin
+
+######### SHARED ITEMS ROUTES
   get '/shared_items',  to: 'shared_items#index',     as: :library
   post '/shared_items', to: 'shared_items#create'
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
