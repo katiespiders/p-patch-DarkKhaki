@@ -8,13 +8,13 @@ Rails.application.routes.draw do
   delete  'sessions',         to: "sessions#destroy", as: :session
 
 ######### USERS ROUTES
-  get     'users/new',        to: "users#new",        as: :new_user
+  get     'users/new',        to: "users#new",        as: :users
   post    'users/new',        to: "users#create"
   get     'users/:id',        to: "users#show",       as: :user
   get     'users/:id/edit',   to: "users#edit",       as: :edit_user
   patch   'users/:id/',       to: "users#update"
   delete  'users/:id',        to: "users#destroy"
-  get '/admin',               to: 'users#admin',            as: :admin
+  get '/admin',               to: 'users#admin',      as: :admin
 
 ######### SHARED ITEMS ROUTES
   get '/shared_items',  to: 'shared_items#index',     as: :library
