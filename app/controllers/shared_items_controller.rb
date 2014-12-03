@@ -7,8 +7,7 @@ class SharedItemsController < ApplicationController
     if defined? @item.errors
       render "users/admin"
     else
-      flash[:notice] = "Your items have been added." if @item != 0 
-      redirect_to :admin
+      redirect_to :admin, notice: "Your items have been added."
     end
   end
 
