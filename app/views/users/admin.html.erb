@@ -1,0 +1,9 @@
+<h1> Admin Stuff </h1>
+
+<h2> Add New Resources to the Library </h2>
+
+<%= form_tag library_path do %>
+  <%= number_field_tag :quantity, params[:quantity], placeholder: "3" %>
+  <%= text_field_tag :name, params[:name], placeholder: "shovels" %>
+  <%= submit_tag "Add Items" %>
+<% end %>
