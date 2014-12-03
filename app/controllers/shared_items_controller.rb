@@ -1,10 +1,14 @@
 class SharedItemsController < ApplicationController
 
   def create
-    if SharedItem.create_many(params[:name].singularize, params[:quantity].to_i)
-      redirect_to :admin, notice: "Your items have been added."
+    @item = SharedItem.create_many(params[:name].singularize, params[:quantity].to_i)
+    # create many returns the item with errors if it is unsuccessful
+    # otherwise it return quanitity
+    if defined? @item.errors
+      render "users/admin"
     else
-      render "users/admin", notice: "This should be superfluous once we have errors"
+      flash[:notice] = "Your items have been added." if @item != 0 
+      redirect_to :admin
     end
   end
 

@@ -2,7 +2,7 @@
 
 <h2> Add New Resources to the Library </h2>
 
-<%= error_message(current_order) %>
+<%= error_message(@item) if defined? @item %>
 
 <%= form_tag library_path do %>
   <%= number_field_tag :quantity, params[:quantity], placeholder: "3" %>
