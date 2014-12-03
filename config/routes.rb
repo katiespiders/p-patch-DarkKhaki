@@ -3,11 +3,16 @@ Rails.application.routes.draw do
 
   root  'pages#about'
 
+######### SESSIONS ROUTES
+  get     'sessions/new',     to: "sessions#new",     as: :new_session
+  post    'sessions/new',     to: "sessions#create"
+  delete  'sessions',         to: "sessions#destroy", as: :session
+
 ######### USERS ROUTES
-  get     'users/new',        to: "users#new",      as: :new_user
-  post    'users/new',        to: "users#create",   as: :users
-  get     'users/:id',        to: "users#show",     as: :user
-  get     'users/:id/edit',   to: "users#edit",     as: :edit_user
+  get     'users/new',        to: "users#new",        as: :new_user
+  post    'users/new',        to: "users#create"    
+  get     'users/:id',        to: "users#show",       as: :user
+  get     'users/:id/edit',   to: "users#edit",       as: :edit_user
   patch   'users/:id/',       to: "users#update"
   delete  'users/:id',        to: "users#destroy"
 
