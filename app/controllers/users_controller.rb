@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def admin
-
+    authorize_admin
   end
 
   def create
@@ -19,6 +19,10 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:username, :password, :password_confirmation)
+    end
+
+    def authorize_admin
+      redirect_to root_path, notice: "Not authorized" unless current_user.admin
     end
 
 end
