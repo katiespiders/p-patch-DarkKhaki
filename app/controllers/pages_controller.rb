@@ -1,3 +1,4 @@
 class PagesController < ApplicationController
-  def index
+  def landing
+  end
 end
