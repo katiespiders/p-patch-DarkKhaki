@@ -17,8 +17,9 @@ Rails.application.routes.draw do
   get     '/admin',           to: 'users#admin',      as: :admin
 
 ######### SHARED ITEMS ROUTES
-  get '/shared_items',  to: 'shared_items#index',     as: :library
-  post '/shared_items', to: 'shared_items#create'
+  get '/library',             to: 'shared_items#index',     as: :library
+  post '/library',            to: 'shared_items#create'
+  patch '/library',           to: 'shared_items#checkout'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

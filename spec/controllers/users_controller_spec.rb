@@ -10,7 +10,10 @@ describe UsersController, :type => :controller do
     end
 
     context "when you're logged in but not an admin" do
-      before { User.create(username: "Meow", password: "a", password_digest: "a")
+      before { User.create(username: "Meow",
+                           email: "meow@ag.com",
+                           password: "aaaaaaaaa",
+                           password_digest: "aaaaaaaa")
               session[:current_user] = User.last.id }
       it "redirects you to about page" do
         get :admin
@@ -21,8 +24,9 @@ describe UsersController, :type => :controller do
 
     context "when you're logged in and an admin" do
       before { User.create(username: "Meow",
-                          password: "a",
-                          password_digest: "a",
+                          email: "meow@ag.com",
+                          password: "aaaaaaaaa",
+                          password_digest: "aaaaaaaaaa",
                           admin: true)
               session[:current_user] = User.last.id }
       it "renders the admin page" do

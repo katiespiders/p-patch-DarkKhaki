@@ -17,4 +17,24 @@ class SharedItem < ActiveRecord::Base
     end
   end
 
+  def self.available_item_hash
+    item_hash = {}
+    SharedItem.all.each do |item|
+      if item.user_id == nil
+        add_to_hash(item_hash, item)
+      end
+    end
+    item_hash
+  end
+
+  private
+
+  def self.add_to_hash(hash, item)
+    if hash[item.name]
+      hash[item.name] += 1
+    else
+      hash[item.name] = 1
+    end
+  end
+
 end
