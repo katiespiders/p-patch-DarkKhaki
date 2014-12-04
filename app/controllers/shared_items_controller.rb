@@ -16,7 +16,11 @@ class SharedItemsController < ApplicationController
   end
 
   def checkout
-    redirect_to :library, notice: "noice!"
+    item = SharedItem.find_by(name: params[:name], user_id: nil)
+    item.update(user_id: current_user.id, due: Date.today+7.days)
+    # this part will change when we do ajax!
+    @item_hash = SharedItem.available_item_hash
+    render :index
   end
 
 
