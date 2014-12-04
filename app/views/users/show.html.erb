@@ -2,8 +2,20 @@
   username: <%= @user.username %>
   email: <%= @user.email %>
 
+  <!--View and update Admin status for other users. Currently cannot remove admin status-->
+  <% if current_user && current_user.admin %>
+    Admin Status: <%= @user.admin %>
+    <% unless @user.admin %>
+      <%= form_tag admin_path, method: :patch do %>
+        <%= hidden_field_tag :user, params[:user], value: @user.id %>
+        <%= submit_tag "Make Admin" %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+<!--View your checked out tools, sorted by due date-->
 <h3> Stuff </h3>
-<table data-url="data1.json" data-height="299" data-sort-name="name" data-sort-order="desc" class ="table">
+<table class ="table">
   <thread>
     <tr>
       <th> Item </th>

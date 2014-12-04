@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   get     'users/:id/edit',   to: "users#edit",       as: :edit_user
   patch   'users/:id/',       to: "users#update"
   delete  'users/:id',        to: "users#destroy"
+
   get     '/admin',           to: 'users#admin',      as: :admin
+  patch   '/admin',           to: "users#make_admin"
 
 ######### SHARED ITEMS ROUTES
   get '/library',             to: 'shared_items#index',     as: :library
