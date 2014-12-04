@@ -15,7 +15,6 @@ class UsersController < ApplicationController
       flash[:notice] = "Welcome to B-Patch, #{@user.username}!"
       redirect_to root_path
     else
-      flash[:notice] = "Fail" # this doesn't work for render, fix it
       render :new
     end
   end

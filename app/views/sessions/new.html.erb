@@ -9,12 +9,12 @@
       <tr>
         <td><%= label_tag("user[username]", "Username") %></td>
         <td><%= text_field_tag("user[username]", @username) %></td>
-        <td class="alert"><%= flash[:notice][:username] if flash[:notice] %></td>
+        <td class="alert"><%= flash[:alert][:username] if flash[:alert] %></td>
       </tr>
       <tr>
         <td><%= label_tag("user[password]", "Password") %></td>
         <td><%= password_field_tag("user[password]") %></td>
-          <%= flash[:notice] && flash[:notice][:password] ? flash[:notice][:password] : password_requirement %>
+          <%= flash[:alert] && flash[:alert][:password] ? flash[:alert][:password] : password_requirement %>
       </tr>
       <tr>
         <td colspan="3"><%= submit_tag "Sign In" %></td>
