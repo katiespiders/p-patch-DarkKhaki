@@ -13,7 +13,7 @@
 
       <%if current_user %>
         <td>
-          <%= form_tag action: :patch do %>
+          <%= form_tag :library, method: :patch do %>
             <%= hidden_field_tag :name, params[:name], value: name %>
             <%= submit_tag "Check Out" %>
           <% end %>
