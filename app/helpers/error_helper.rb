@@ -13,7 +13,14 @@ module ErrorHelper
 
   def error_field(obj, field)
     if obj.errors.any? && !obj.errors[field].empty?
-      "<td><span class='alert'>*</span> #{field_value(obj, field)} #{obj.errors[field].to_sentence}.</td>".html_safe
+      html = "<td><span class='alert'>*</span>"
+      if field == :password || field == :password_confirmation
+        html += "#{ field == :password ? "Password " : "Password confirmation "} "
+      else
+        html += "#{field_value(obj, field)}"
+      end
+      html += "#{obj.errors[field].to_sentence}.</td>"
+      html.html_safe
     end
   end
 
