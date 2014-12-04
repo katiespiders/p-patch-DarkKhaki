@@ -8,11 +8,13 @@ class SessionsController < ApplicationController
         flash[:notice] = "Hi, #{username}!"
         redirect_to root_path
       else
-        flash[:notice] = { password: "Wrong password :(" }
+        flash[:notice] = { password: "<td class='alert'>Wrong password :(</td>".html_safe }
+        @username = username
         render :new
       end
     else
       flash[:notice] = { username: "#{username} is not a registered user" }
+      @username = username
       render :new
     end
   end

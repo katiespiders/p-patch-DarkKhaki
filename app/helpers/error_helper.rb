@@ -25,7 +25,7 @@ module ErrorHelper
   end
 
   def password_requirement
-    "<small>At least 8 characters with 1 digit</small>".html_safe
+    "<td><small>At least 8 characters with 1 digit</small></td>".html_safe
   end
 
   private
