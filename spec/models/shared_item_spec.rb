@@ -30,6 +30,24 @@ describe SharedItem do
       end
     end
 
+  describe '#self.available_item_hash' do
+    before {
+      SharedItem.create_many('bananas', 10)
+      SharedItem.create_many('bees', 5)
+      SharedItem.create_many('gloves', 1)
+      SharedItem.create_many('sunglasses', 3)
+    }
+    it "returns a hash with no repeated keys" do
+      expect(SharedItem.available_item_hash.keys.count).to eq 4
+    end
+
+    it "does not count items which are checked out" do
+      item = SharedItem.find_by(name: 'gloves')
+      item.update(user_id: 1)
+      expect(SharedItem.available_item_hash['gloves']).to be_nil
+    end
+  end
+
 
   end
 
