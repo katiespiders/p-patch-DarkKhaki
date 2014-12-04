@@ -11,5 +11,15 @@ module ErrorHelper
     end
   end
 
+  def error_field(obj, field)
+    if obj.errors.any? && !obj.errors[field].empty?
+      "<td><span class='alert'>*</span> #{field_value(obj, field)} #{obj.errors[field].to_sentence}.</td>".html_safe
+    end
+  end
+
+  private
+    def field_value(obj, field)
+      params[obj.class.to_s.downcase][field]
+    end
 
 end
