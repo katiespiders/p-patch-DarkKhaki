@@ -6,10 +6,13 @@
 <table class = "table">
   <th> Item </th>
   <th> Due </th>
-  <% @user.shared_items.each do |item| %>
+  <th> Quantity </th>
+  <% @items.each do |k, v| %>
+    <% name, date = k.split('**_**') %>
     <tr>
-      <td> <%= item.name %> </td>
-      <td> <%= item.due.localtime.to_date %> </td>
+      <td> <%= name %> </td>
+      <td> <%= date %> </td>
+      <td> <%= v %> </td>
     </tr>
   <% end %>
 </table>

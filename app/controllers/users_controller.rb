@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
     redirect_to root_path, notice: "Account not found" unless @user
+    @items = SharedItem.users_items_hash(@user)
   end
 
   def create

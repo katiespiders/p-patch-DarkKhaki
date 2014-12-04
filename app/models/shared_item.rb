@@ -21,7 +21,7 @@ class SharedItem < ActiveRecord::Base
     item_hash = {}
     SharedItem.all.each do |item|
       if item.user_id == nil
-        add_to_hash(item_hash, item)
+        add_to_hash(item_hash, item.name)
       end
     end
     item_hash
@@ -30,7 +30,8 @@ class SharedItem < ActiveRecord::Base
   def self.users_items_hash(user)
     users_items = {}
     user.shared_items.each do |item|
-      add_to_hash(users_items, item)
+      unique_key = item.name+"**_**"+item.due.to_date.to_s
+      add_to_hash(users_items, unique_key)
     end
     users_items
   end
@@ -38,10 +39,10 @@ class SharedItem < ActiveRecord::Base
   private
 
   def self.add_to_hash(hash, item)
-    if hash[item.name]
-      hash[item.name] += 1
+    if hash[item]
+      hash[item] += 1
     else
-      hash[item.name] = 1
+      hash[item] = 1
     end
   end
 
