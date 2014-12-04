@@ -10,7 +10,7 @@
   <% if session[:current_user] %>
     <%= link_to "Sign Out", session_path(User.find(session[:current_user])), method: :delete %>
   <% else %>
-    <%= link_to "Sign In", new_session_path %>
+    <%= link_to "Sign In", sessions_path %>
     <%= link_to "Sign Up", users_path %>
   <% end %>
 </header>

@@ -1,1 +1,22 @@
-<!-- this is currently a form_tag instead of form_for because form_for was not sending a nested hash. I'm sure there is a way around that and I will never refactor this but I will put in this note anyway -->
+<!DOCTYPE html>
+<head>
+  <title>Sign In</title>
+</head>
+
+<body>
+  <%= form_tag sessions_path, method: :post do %>
+    <table class="table">
+      <tr>
+        <td><%= label_tag("user[username]", "Username") %></td>
+        <td><%= text_field_tag("user[username]") %></td>
+      </tr>
+      <tr>
+        <td><%= label_tag("user[password]", "Password") %></td>
+        <td colspan="2"><%= password_field_tag("user[password]") %></td>
+      </tr>
+      <tr>
+        <td colspan="3"><%= submit_tag "Sign In" %></td>
+      </tr>
+  <% end %>
+</body>
+</html>
