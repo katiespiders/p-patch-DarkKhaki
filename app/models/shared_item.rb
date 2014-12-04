@@ -27,6 +27,18 @@ class SharedItem < ActiveRecord::Base
     item_hash
   end
 
+  def self.users_items_array(user)
+    hash = users_items_hash(user)
+    hash.collect do |k, v|
+      name, date = k.split('**_**')
+      quantity = v
+      [name, date, quantity]
+    end
+  end
+
+
+  private
+
   def self.users_items_hash(user)
     users_items = {}
     user.shared_items.each do |item|
@@ -36,8 +48,6 @@ class SharedItem < ActiveRecord::Base
     users_items
   end
 
-  private
-
   def self.add_to_hash(hash, item)
     if hash[item]
       hash[item] += 1
@@ -45,5 +55,7 @@ class SharedItem < ActiveRecord::Base
       hash[item] = 1
     end
   end
+
+
 
 end

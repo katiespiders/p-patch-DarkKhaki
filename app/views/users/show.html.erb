@@ -3,16 +3,19 @@
   email: <%= @user.email %>
 
 <h3> Stuff </h3>
-<table class = "table">
-  <th> Item </th>
-  <th> Due </th>
-  <th> Quantity </th>
-  <% @items.each do |k, v| %>
-    <% name, date = k.split('**_**') %>
+<table data-url="data1.json" data-height="299" data-sort-name="name" data-sort-order="desc" class ="table">
+  <thread>
     <tr>
-      <td> <%= name %> </td>
-      <td> <%= date %> </td>
-      <td> <%= v %> </td>
+      <th> Item </th>
+      <th> Due </th>
+      <th data-field="quantity" data-sortable="true">Quantity</th>
+    </tr>
+  </thread>
+  <% @items.each do |array| %>
+    <tr class = <%= Date.parse(array[1]).past? ? "past_due" : "not_due" %>  >
+      <% array.each do |attribute| %>
+        <td> <%= attribute %> </td>
+      <% end %>
     </tr>
   <% end %>
 </table>
