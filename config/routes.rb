@@ -14,11 +14,14 @@ Rails.application.routes.draw do
   get     'users/:id/edit',   to: "users#edit",       as: :edit_user
   patch   'users/:id/',       to: "users#update"
   delete  'users/:id',        to: "users#destroy"
-  get '/admin',               to: 'users#admin',      as: :admin
+
+  get     '/admin',           to: 'users#admin',      as: :admin
+  patch   '/admin',           to: "users#make_admin"
 
 ######### SHARED ITEMS ROUTES
-  get '/shared_items',  to: 'shared_items#index',     as: :library
-  post '/shared_items', to: 'shared_items#create'
+  get '/library',             to: 'shared_items#index',     as: :library
+  post '/library',            to: 'shared_items#create'
+  patch '/library',           to: 'shared_items#checkout'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

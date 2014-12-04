@@ -1,0 +1,27 @@
+<h1> Community Goods </h2>
+
+<table class = "table">
+
+  <tr>
+    <th> Item </th>
+    <th> Quantity </th>
+  </tr>
+  <% @item_hash.each do |name, quantity| %>
+    <tr>
+      <td> <%= name %> </td>
+      <td> <%=quantity %> </td>
+
+      <%if current_user %>
+        <td>
+          <%= form_tag :library, method: :patch do %>
+            <%= hidden_field_tag :name, params[:name], value: name %>
+            <%= submit_tag "Check Out" %>
+          <% end %>
+        </td>
+
+      <% end %>
+
+    </tr>
+  <% end %>
+
+</table>
