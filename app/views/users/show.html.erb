@@ -1,0 +1,15 @@
+<h3> Account information </h3>
+  username: <%= @user.username %>
+  email: <%= @user.email %>
+
+<h3> Stuff </h3>
+<table class = "table">
+  <th> Item </th>
+  <th> Due </th>
+  <% @user.shared_items.each do |item| %>
+    <tr>
+      <td> <%= item.name %> </td>
+      <td> <%= item.due.localtime.to_date %> </td>
+    </tr>
+  <% end %>
+</table>

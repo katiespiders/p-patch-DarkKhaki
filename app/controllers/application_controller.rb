@@ -8,4 +8,9 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def authorize_logged_in
+    unless current_user
+      redirect_to root_path, notice: "You must be logged in to do that."
+    end
+  end
 end

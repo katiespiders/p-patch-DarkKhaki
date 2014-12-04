@@ -27,6 +27,14 @@ class SharedItem < ActiveRecord::Base
     item_hash
   end
 
+  def self.users_items_hash(user)
+    users_items = {}
+    user.shared_items.each do |item|
+      add_to_hash(users_items, item)
+    end
+    users_items
+  end
+
   private
 
   def self.add_to_hash(hash, item)

@@ -1,4 +1,5 @@
 class SharedItemsController < ApplicationController
+  before_filter :authorize_logged_in, only: :checkout
 
   def index
     @item_hash = SharedItem.available_item_hash
@@ -19,8 +20,7 @@ class SharedItemsController < ApplicationController
     item = SharedItem.find_by(name: params[:name], user_id: nil)
     item.update(user_id: current_user.id, due: Date.today+7.days)
     # this part will change when we do ajax!
-    @item_hash = SharedItem.available_item_hash
-    render :index
+    redirect_to :library, notice: "#{item.name.capitalize} has been checked out."
   end
 
 

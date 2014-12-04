@@ -1,11 +1,17 @@
 class UsersController < ApplicationController
   before_filter :authorize_admin, only: :admin
+  before_filter :authorize_logged_in, only: :show
 
   def admin
   end
 
   def new
     @user = User.new
+  end
+
+  def show
+    @user = User.find_by(id: params[:id])
+    redirect_to root_path, notice: "Account not found" unless @user
   end
 
   def create
