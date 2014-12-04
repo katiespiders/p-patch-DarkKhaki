@@ -1,10 +1,37 @@
-<%= form_for User.new do |f|%>
-  <%= f.label             :username %>
-  <%= f.text_field        :username %>
-  <%= f.label             :password %>
-  <%= f.password_field    :password %>
-  <%= f.label             :password_confirmation %>
-  <%= f.password_field    :password_confirmation %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create an account</title>
+</head>
 
-  <%= f.submit %>
-<% end %>
+<body>
+
+  <%= form_for @user, url: users_path do |f|%>
+    <table class="table">
+    <tr>
+      <td><%= f.label :username %></td>
+      <td><%= f.text_field :username %> <%= error_field(@user, :username) %> </td>
+    </tr>
+    <tr>
+      <td><%= f.label :email %></td>
+      <td><%= f.text_field :email %> <%= error_field(@user, :email) %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :email_confirmation %></td>
+      <td><%= f.text_field :email_confirmation %> <%= error_field(@user, :email_confirmation) %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :password %></td>
+      <td><%= f.password_field :password %> <%= error_field(@user, :password) %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :password_confirmation %></td>
+      <td colspan="2"><%= f.password_field :password_confirmation %></td>
+    </tr>
+    <tr>
+      <td colspan="3"><%= f.submit %></td>
+    </tr>
+    <% end %>
+  </table>
+</body>
+</html>

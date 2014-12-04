@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root  'pages#about'
 
 ######### SESSIONS ROUTES
-  get     'sessions/new',     to: "sessions#new",     as: :new_session
+  get     'sessions/new',     to: "sessions#new",     as: :sessions
   post    'sessions/new',     to: "sessions#create"
   delete  'sessions',         to: "sessions#destroy", as: :session
 

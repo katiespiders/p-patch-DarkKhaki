@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
   has_many :shared_items
   has_many :events
 
+  validates :username, presence: true, uniqueness: true
+  validates :email, presence: true, confirmation: true, uniqueness: true
+  validates :email_confirmation, presence: true
+#  validates :password, length: { minimum: 8 }
 end

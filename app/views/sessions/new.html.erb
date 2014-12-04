@@ -1,10 +1,22 @@
-<%= form_tag '/sessions/new', method: :post do %>
+<!DOCTYPE html>
+<head>
+  <title>Sign In</title>
+</head>
 
-  <%= label_tag("user[username]", "Username") %>
-  <%= text_field_tag("user[username]") %>
-  <%= label_tag("user[password]", "Password") %>
-  <%= password_field_tag("user[password]") %>
-
-  <%= submit_tag "Sign In" %>
-
-<% end %>
+<body>
+  <%= form_tag sessions_path, method: :post do %>
+    <table class="table">
+      <tr>
+        <td><%= label_tag("user[username]", "Username") %></td>
+        <td><%= text_field_tag("user[username]") %></td>
+      </tr>
+      <tr>
+        <td><%= label_tag("user[password]", "Password") %></td>
+        <td colspan="2"><%= password_field_tag("user[password]") %></td>
+      </tr>
+      <tr>
+        <td colspan="3"><%= submit_tag "Sign In" %></td>
+      </tr>
+  <% end %>
+</body>
+</html>
