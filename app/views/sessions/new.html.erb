@@ -4,15 +4,20 @@
 </head>
 
 <body>
+  <!-- these error messages are hacky -->
   <%= form_tag sessions_path, method: :post do %>
     <table class="table">
       <tr>
         <td><%= label_tag("user[username]", "Username") %></td>
         <td><%= text_field_tag("user[username]") %></td>
+        <td><%= flash[:notice][:username] if flash[:notice] %></td>
       </tr>
       <tr>
         <td><%= label_tag("user[password]", "Password") %></td>
-        <td colspan="2"><%= password_field_tag("user[password]") %></td>
+        <td><%= password_field_tag("user[password]") %></td>
+        <td>
+          <%= flash[:notice] && flash[:notice][:password] ? flash[:notice][:password] : password_requirement %>
+        </td>
       </tr>
       <tr>
         <td colspan="3"><%= submit_tag "Sign In" %></td>

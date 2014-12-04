@@ -15,11 +15,12 @@
   <% end %>
 </header>
 <body>
-  <div class="flash">
-    <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
+  <!-- flash message provided by rails-->
+  <!--<div class="flash">
+    <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, id: "flash_#{name}" %>
     <% end %>
-  </div>
+  </div>-->
 <%= yield %>
 
 </body>

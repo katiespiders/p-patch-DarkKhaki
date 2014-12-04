@@ -24,6 +24,10 @@ module ErrorHelper
     end
   end
 
+  def password_requirement
+    "<small>At least 8 characters with 1 digit</small>".html_safe
+  end
+
   private
     def field_value(obj, field)
       params[obj.class.to_s.downcase][field]
