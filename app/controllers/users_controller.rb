@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
+  before_filter :authorize_admin, only: :admin
 
   def admin
-    authorize_admin
   end
 
   def create
@@ -22,7 +22,9 @@ class UsersController < ApplicationController
     end
 
     def authorize_admin
-      redirect_to root_path, notice: "Not authorized" unless current_user.admin
+      unless current_user && current_user.admin
+        redirect_to root_path, notice: "Not authorized"
+      end
     end
 
 end
