@@ -1,10 +1,1 @@
-<%= form_tag '/sessions/new', method: :post do %>
-
-  <%= label_tag("user[username]", "Username") %>
-  <%= text_field_tag("user[username]") %>
-  <%= label_tag("user[password]", "Password") %>
-  <%= password_field_tag("user[password]") %>
-
-  <%= submit_tag "Sign In" %>
-
-<% end %>
+<!-- this is currently a form_tag instead of form_for because form_for was not sending a nested hash. I'm sure there is a way around that and I will never refactor this but I will put in this note anyway -->
