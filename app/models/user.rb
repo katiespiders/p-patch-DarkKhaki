@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 #  validates :password, format: { with: /\A.*(?=.{8,})(?=.*\d).*\z/, message: " must be at least 8 characters and contain at least 1 digit" }
 
   def self.spam
-    self.all.each { |user| BeeMailer.new_article(user.email).deliver }
+    self.all.each { |user| Resque.enqueue(EmailJob, user.email) }
   end
 
 end
