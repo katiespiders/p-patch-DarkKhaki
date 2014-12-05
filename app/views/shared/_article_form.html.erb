@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Post new article</title>
+</head>
+
+<body>
+  <table class="table">
+  <%= form_for @article do |f| %>
+  <tr>
+    <td><%= f.label  :title %></td>
+    <td><%= f.text_field :title %></td>
+    <td><%= title_error(@article) %>    </td>
+  </tr>
+  <tr>
+    <td><%= f.label :content %></td>
+    <td><%= f.text_area :content %></td>
+    <td><%= content_error(@article) %></td>
+  </tr>
+  <tr colspan="3">
+    <td><%= f.submit %></td>
+  </tr>
+  <% end %>
+  </table>
+</body>
+</html>
