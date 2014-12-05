@@ -1,33 +1,50 @@
-<h3> Account information </h3>
-  username: <%= @user.username %>
-  email: <%= @user.email %>
+<div class="row">
+  <div class="col-sm-4">
+    <h3> Account information </h3>
+      username: <%= @user.username %>
+      email: <%= @user.email %>
 
-  <!--View and update Admin status for other users. Currently cannot remove admin status-->
-  <% if current_user && current_user.admin %>
-    Admin Status: <%= @user.admin %>
-    <% unless @user.admin %>
-      <%= form_tag admin_path, method: :patch do %>
-        <%= hidden_field_tag :user, params[:user], value: @user.id %>
-        <%= submit_tag "Make Admin" %>
+      <!--View and update Admin status for other users. Currently cannot remove admin status-->
+      <% if current_user && current_user.admin %>
+        Admin Status: <%= @user.admin %>
+        <% unless @user.admin %>
+          <%= form_tag admin_path, method: :patch do %>
+            <%= hidden_field_tag :user, params[:user], value: @user.id %>
+            <%= submit_tag "Make Admin" %>
+          <% end %>
+        <% end %>
       <% end %>
-    <% end %>
-  <% end %>
+  </div> <!-- Ends first col-->
 
-<!--View your checked out tools, sorted by due date-->
-<h3> Stuff </h3>
-<table class ="table table-hover">
-  <thread>
-    <tr>
-      <th> Item </th>
-      <th> Due </th>
-      <th data-field="quantity" data-sortable="true">Quantity</th>
-    </tr>
-  </thread>
-  <% @items.each do |array| %>
-    <tr class = <%= Date.parse(array[1]).past? ? "past_due" : "not_due" %>  >
-      <% array.each do |attribute| %>
-        <td> <%= attribute %> </td>
+  <div class="col-sm-4">
+  <!--View your checked out tools, sorted by due date-->
+    <h3> Stuff </h3>
+    <table class ="table table-hover">
+      <thread>
+        <tr>
+          <th> Item </th>
+          <th> Due </th>
+          <th data-field="quantity" data-sortable="true">Quantity</th>
+        </tr>
+      </thread>
+      <% @items.each do |array| %>
+        <tr class = <%= Date.parse(array[1]).past? ? "past_due" : "not_due" %>  >
+          <% array.each do |attribute| %>
+            <td> <%= attribute %> </td>
+          <% end %>
+        </tr>
       <% end %>
-    </tr>
-  <% end %>
-</table>
+    </table>
+  </div> <!-- ends tools col -->
+
+  <div class="col-sm-4">
+    <h3> Events </h3>
+    <table class="table">
+      <tr>
+        <th> Name </th>
+        <th> Start </th>
+        <th> End </th>
+      </tr>
+    </table>
+  </div>
+</div>
