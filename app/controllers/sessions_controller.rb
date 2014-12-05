@@ -4,18 +4,22 @@ class SessionsController < ApplicationController
     if user = User.find_by(username: username)
       if user.authenticate(password)
         session[:current_user] = user.id
-        flash[:notice] = "Hi, #{user.username}!"
+        flash[:notice] = "Hi, #{username}!"
         redirect_to root_path
       else
-        raise "wrong password"  # make this a real error
+        flash[:alert] = { password: "<td class='alert'>Wrong password :(</td>".html_safe }
+        @username = username
+        render :new
       end
     else
-      raise "you don't exist"   # make this a real error
+      flash[:alert] = { username: "#{username} is not a registered user" }
+      @username = username
+      render :new
     end
   end
 
   def destroy
-    username = User.find(session[:current_user]).username
+    username = current_user.username
     session[:current_user] = nil
     redirect_to root_path, notice: "Later, #{username}!"
   end

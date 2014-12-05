@@ -7,19 +7,24 @@
   <%= csrf_meta_tags %>
 </head>
 <header>
-  <% if session[:current_user] %>
-    <%= link_to "Sign Out", session_path(User.find(session[:current_user])), method: :delete %>
+  <% if current_user %>
+    <%= link_to "Sign Out", session_path, method: :delete %>
+    <%= link_to "Account", current_user %>
   <% else %>
     <%= link_to "Sign In", sessions_path %>
     <%= link_to "Sign Up", users_path %>
   <% end %>
+    <%= link_to "Library", library_path %>
+
 </header>
 <body>
-  <div class="flash">
-    <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
+  <!-- flash message provided by rails-->
+  <!-- <div class="flash">
+    <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, id: "flash_#{name}" %>
     <% end %>
-  </div>
+  </div> -->
+  <%= flash[:notice] %>
 <%= yield %>
 
 </body>
