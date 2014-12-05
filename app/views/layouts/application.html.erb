@@ -6,26 +6,30 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<header>
-  <% if current_user %>
-    <%= link_to "Sign Out", session_path, method: :delete %>
-    <%= link_to "Account", current_user %>
-  <% else %>
-    <%= link_to "Sign In", sessions_path %>
-    <%= link_to "Sign Up", users_path %>
-  <% end %>
-    <%= link_to "Library", library_path %>
-
-</header>
 <body>
+  <header>
+      <%= link_to "About", root_path %> |
+      <%= link_to "Library", library_path %> |
+    <% if current_user %>
+      <%= link_to "Account", current_user %> |
+      <%= link_to "Sign Out", session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Sign In", sessions_path %> |
+      <%= link_to "Sign Up", users_path %>
+    <% end %>
+
+
+  </header>
   <!-- flash message provided by rails-->
   <!-- <div class="flash">
     <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, id: "flash_#{name}" %>
     <% end %>
   </div> -->
-  <%= flash[:notice] %>
-<%= yield %>
+  <div class= "container">
+    <%= flash[:notice] %>
+    <%= yield %>
+  </div>
 
 </body>
 </html>
