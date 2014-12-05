@@ -1,8 +1,9 @@
 <div class="row">
-  <div class="col-sm-4">
-    <h3> Account information </h3>
-      username: <%= @user.username %>
-      email: <%= @user.email %>
+  <div class="col-sm-3">
+    <h3> Account Info</h3>
+    <p> Member for <%=time_ago_in_words(@user.created_at)%> </p>
+    <p> username: <%= @user.username %> </p>
+    <p> email: <%= @user.email %> </p>
 
       <!--View and update Admin status for other users. Currently cannot remove admin status-->
       <% if current_user && current_user.admin %>
@@ -15,8 +16,10 @@
         <% end %>
       <% end %>
   </div> <!-- Ends first col-->
+</div>
+<div class="row">
 
-  <div class="col-sm-4">
+  <div class="col-sm-5">
   <!--View your checked out tools, sorted by due date-->
     <h3> Stuff </h3>
     <table class ="table table-hover">
@@ -37,7 +40,7 @@
     </table>
   </div> <!-- ends tools col -->
 
-  <div class="col-sm-4">
+  <div class="col-sm-5">
     <h3> Events </h3>
     <table class="table">
       <tr>
