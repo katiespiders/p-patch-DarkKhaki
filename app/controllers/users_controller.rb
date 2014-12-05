@@ -11,7 +11,6 @@ class UsersController < ApplicationController
     user = User.find(params[:user])
     user.update(admin: true)
     redirect_to user
-
   end
 
   def new

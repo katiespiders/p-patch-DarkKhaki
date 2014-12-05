@@ -1,0 +1,5 @@
+<%= image_tag obj.pic %>
+<%= link_to obj.title, article_path(obj.id) %>
+<%= obj.content[0..500] %>
+<%= link_to "Edit", edit_article_path(obj.id) if authorized? %>
+<%= link_to "Delete", article_path(obj.id), method: :delete if authorized? %>

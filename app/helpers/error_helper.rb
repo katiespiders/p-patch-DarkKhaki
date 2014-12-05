@@ -11,9 +11,10 @@ module ErrorHelper
     end
   end
 
+  # refactor all this bs
   def error_field(obj, field)
     if obj.errors.any? && !obj.errors[field].empty?
-      html = "<td><span class='alert'>*</span>"
+      html = alert
       if field == :password || field == :password_confirmation
         html += "#{ field == :password ? "Password " : "Password confirmation "} "
       else
@@ -22,6 +23,14 @@ module ErrorHelper
       html += "#{obj.errors[field].to_sentence}.</td>"
       html.html_safe
     end
+  end
+
+  def title_error(obj)
+    (alert + "Title #{obj.errors[:title].to_sentence}").html_safe unless obj.errors[:title].empty?
+  end
+
+  def content_error(obj)
+    (alert + "Content #{obj.errors[:content].to_sentence}").html_safe unless obj.errors[:content].empty?
   end
 
   def password_requirement
@@ -33,4 +42,7 @@ module ErrorHelper
       params[obj.class.to_s.downcase][field]
     end
 
+    def alert
+      "<td><span class='alert'>*</span>"
+    end
 end

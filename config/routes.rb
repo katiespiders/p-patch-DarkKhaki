@@ -23,6 +23,15 @@ Rails.application.routes.draw do
   post '/library',            to: 'shared_items#create'
   patch '/library',           to: 'shared_items#checkout'
 
+######### ARTICLES ROUTES
+  get     'articles',         to: 'articles#index',   as: :articles
+  post    'articles',         to: 'articles#create'
+  get     'articles/new',     to: 'articles#new',     as: :create_article
+  get     'articles/:id/',    to: 'articles#show',    as: :article
+  get 'articles/:id/edit',    to: 'articles#edit',    as: :edit_article
+  patch   'articles/:id/',    to: 'articles#update'
+  delete  'articles/:id',     to: 'articles#destroy'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

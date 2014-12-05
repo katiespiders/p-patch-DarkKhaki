@@ -13,4 +13,10 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, notice: "You must be logged in to do that."
     end
   end
+
+  def authorized?
+    current_user && current_user.admin
+  end
+  helper_method :authorized?
+  
 end
