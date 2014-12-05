@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All articles</title>
+</head>
+
+<body>
+  <h1>All articles</h1>
+  <%= link_to "Post new article", create_article_path if authorized? %>
+  <ul>
+    <% @articles.each do |article| %>
+      <li><%= render 'shared/article_preview', obj: article %></li>
+    <% end %>
+  </ul>
+</body>
+</html>
