@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: { message: " is already taken" }
   validates :email, presence: true, confirmation: { message: " doesn't match Email"}, uniqueness: { message: " is already registered; <a href='/sessions/new'>sign in here</a> or reset your password" }
-  validates :email_confirmation, presence: true
+  # validates :email_confirmation, presence: true
 #  validates :password, format: { with: /\A.*(?=.{8,})(?=.*\d).*\z/, message: " must be at least 8 characters and contain at least 1 digit" }
 
   def self.spam
