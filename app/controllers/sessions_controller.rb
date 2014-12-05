@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    username = User.find(session[:current_user]).username
+    username = current_user.username
     session[:current_user] = nil
     redirect_to root_path, notice: "Later, #{username}!"
   end
