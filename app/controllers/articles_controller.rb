@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :find, except: :index
-  before_action :authorized?, except: [:index, :show]
+  before_action :authorize_admin, except: [:index, :show]
 
   def index
     @articles = Article.all.order("created_at desc")
@@ -36,14 +36,14 @@ class ArticlesController < ApplicationController
     @article.destroy
     redirect_to articles_path, notice: "Deleted #{title}"
   end
-
-  def auth_error
-    unless authorized?
-      notice = "This needs a real error"
-      redirect = @article ? article_path(@article.id) : articles_path
-      redirect_to redirect, notice
-    end
-  end
+  #
+  # def auth_error
+  #   unless authorized?
+  #     notice = "This needs a real error"
+  #     redirect = @article ? article_path(@article.id) : articles_path
+  #     redirect_to redirect, notice
+  #   end
+  # end
 
   private
     def article_params

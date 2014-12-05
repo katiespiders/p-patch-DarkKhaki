@@ -8,15 +8,22 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
-  def authorize_logged_in
-    unless current_user
-      redirect_to root_path, notice: "You must be logged in to do that."
+  def admin?
+    current_user && current_user.admin
+  end
+  helper_method :admin?
+
+  def authorize_admin
+    unless admin?
+      redirect_to articles_path, notice: "You are not authorized to do that."
     end
   end
 
-  def authorized?
-    current_user && current_user.admin
+  def authorize_logged_in
+    unless current_user
+      redirect_to articles_path, notice: "You must be logged in to do that."
+    end
   end
-  helper_method :authorized?
-  
+
+
 end
