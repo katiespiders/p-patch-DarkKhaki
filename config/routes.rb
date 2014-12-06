@@ -2,7 +2,7 @@ require 'resque/server'
 
 Rails.application.routes.draw do
   mount Resque::Server, at: '/resque'
-  
+
   root  'pages#about'
 
 ######### SESSIONS ROUTES
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
 ######### SHARED ITEMS ROUTES
   get '/library',             to: 'shared_items#index',     as: :library
+  post '/library/checkout',   to: 'shared_items#checkout',  as: :ajax_checkout
   post '/library',            to: 'shared_items#create'
   patch '/library',           to: 'shared_items#checkout'
 
