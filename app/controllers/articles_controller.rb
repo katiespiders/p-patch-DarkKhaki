@@ -15,6 +15,7 @@ class ArticlesController < ApplicationController
     @article.update(user_id: current_user.id)
     @article.update(pic: 'placeholder.jpg') unless @article.pic?
     if @article.save
+#      User.spam
       redirect_to article_path(@article.id), notice: "Posted #{@article.title}"
     else
       render :new, notice: "Put in some real error messages, Katie"

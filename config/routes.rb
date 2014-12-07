@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root  'pages#about'
+  root  'pages#library'
 
 ######### SESSIONS ROUTES
   get     'sessions/new',     to: "sessions#new",     as: :sessions
