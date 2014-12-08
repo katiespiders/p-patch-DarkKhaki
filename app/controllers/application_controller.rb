@@ -37,4 +37,58 @@ class ApplicationController < ActionController::Base
   end
 
 
+##### SUPER HACKY WEATHER METHODS
+  def weather_helper
+    if current?
+      puts "*"*80, "no call"
+    else
+      puts "*"*80, "calling weather underground"
+      weather = Weather.new
+      session[:weather_data] = weather.stored_hash
+    end
+    puts "%"*80, weather_hash.inspect
+    weather_hash
+  end
+
+  def weather_hash
+    session[:weather_data]
+  end
+
+  def current?
+    if weather_hash
+      puts weather_hash.inspect, "GODDAMNIT ARE YOU FUCKING WITH ME?"
+      if weather_hash[:time]
+        puts "NOW IT'S A SYMBOL!"
+        weather_hash[:time] > cutoff
+      elsif weather_hash["time"] # this is necessary because rails is blatantly just fucking with me
+        puts "NOW IT'S A STRING!"
+        weather_hash["time"] > cutoff
+      end
+    end
+  end
+
+  def cutoff
+    Time.now - 10.minutes
+  end
+
+  def observation_time
+    if weather_helper["time"]
+      DateTime.parse(weather_helper["time"]).strftime('%l:%M %P') # time is a string when the key is a string
+    elsif weather_helper[:time]
+      weather_helper[:time].strftime('%l:%M %P') # time is DateTime when the key is a symbol. I don't understand :'(
+    end
+  end
+  helper_method :observation_time
+
+  def temperature
+    weather_helper["temp"]
+  end
+  helper_method :temperature
+
+  def conditions
+    weather_helper["conditions"]
+  end
+  helper_method :conditions
+
+
 end
