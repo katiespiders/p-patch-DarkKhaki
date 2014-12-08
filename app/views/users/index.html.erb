@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All registered users</title>
+</head>
+
+<body>
+  <table class="table">
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.username %></td>
+      <td><%= "Admin" if user.admin %></td>
+      <td><%= "Tools checked out" unless user.shared_items.empty? %>
+      <td><%= "Tools overdue!" unless user.overdue_array.empty? %>
+      <td><%= link_to "View profile", user_path(user.id) %></td>
+    </tr>
+  <% end %>
+</table>
+</body>
+</html>

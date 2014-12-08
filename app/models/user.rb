@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
   def profile_link
     "<a href='/users/#{id}'>#{username}</a>".html_safe
   end
+
+  def overdue_array
+    shared_items.where("due < ?", Date.today)
+  end
 end
