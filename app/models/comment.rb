@@ -16,6 +16,10 @@ class Comment < ActiveRecord::Base
     created_at.strftime('%l:%M %P on %a %-d %b %Y')
   end
 
+  def edited_at
+    updated_at.strftime('%l:%M %P on %a %-d %b %Y')
+  end
+
   def byline
     (commenter.profile_link + comment_path).html_safe
   end

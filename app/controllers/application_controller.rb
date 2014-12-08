@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_owner(user_id)
-    unless owner?
+    unless owner? || admin?
       redirect_to articles_path, notice: "That's not yours"
     end
   end
