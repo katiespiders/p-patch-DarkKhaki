@@ -90,5 +90,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :conditions
 
+  def weather_icon
+    weather_helper["image"]
+  end
+  helper_method :weather_icon
+
 
 end
