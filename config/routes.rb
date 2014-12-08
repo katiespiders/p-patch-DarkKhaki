@@ -1,6 +1,9 @@
-Rails.application.routes.draw do
+require '/resque/server'
 
-  root  'pages#library'
+Rails.application.routes.draw do
+  mount Resque::Server, at: '/resque'
+
+  root  'articles#index'
 
 ######### SESSIONS ROUTES
   get     'sessions/new',     to: "sessions#new",     as: :sessions
