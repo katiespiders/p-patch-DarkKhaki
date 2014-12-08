@@ -62,3 +62,8 @@ header {
   height: 60px;
   float: right;
 }
+
+.comment {
+  border: solid;
+  margin: 5px;
+}

@@ -17,7 +17,7 @@
   <% end %>
   <% if current_user %>
     <h5>Comment on this article</h5>
-    <%= render '/shared/comment_form' %>
+    <%= render '/shared/comment_form', comment: Comment.new %>
     <%= link_to "Back to articles index", articles_path %>
   <% else %>
     <%= link_to "Sign in to comment", sessions_path %>

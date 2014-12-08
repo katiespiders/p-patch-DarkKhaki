@@ -37,11 +37,12 @@ Rails.application.routes.draw do
   delete  'articles/:id',     to: 'articles#destroy'
 
 ######### COMMENTS ROUTES
-  get     'articles/:id/comments',        to: 'comments#index',  as: :comments
-  post    'articles/:id/comments',         to: 'comments#create'
-  get     'articles/:article_id/comments/:comment_id', to: 'comments#show', as: :comment
-  patch   'articles/:article_id/comments/:comment_id', to: 'comments#update'
-  delete  'articles/:article_id/comments/:comment_id', to: 'comments#destroy'
+  get     'articles/:id/comments',      to: 'comments#index',  as: :comments
+  post    'articles/:id/comments',      to: 'comments#create'
+  get     'comments/:id',       to: 'comments#show', as: :comment
+  get     'comments/:id/edit',  to: 'comments#edit', as: :edit_comment
+  patch   'comments/:id',       to: 'comments#update'
+  delete  'comments/:id',       to: 'comments#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
