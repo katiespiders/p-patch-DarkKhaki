@@ -38,6 +38,7 @@ end
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'resque'
+gem 'whenever'
 
 # Use unicorn as the app server
 # gem 'unicorn'
