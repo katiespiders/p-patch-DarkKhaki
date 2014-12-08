@@ -30,6 +30,10 @@ header {
   text-align: right;
 }
 
+header #weather {
+  float: left;
+}
+
 .about_page {
   background-image: url(garden_banner.jpg);
   background-repeat:no-repeat;
