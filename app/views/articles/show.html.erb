@@ -8,3 +8,6 @@
   <%= render 'shared/article_preview', obj: @article %>
 </body>
 </html>
+
+<%= link_to "Edit", edit_article_path(@article.id) if admin? %>
+<%= link_to "Delete", article_path(@article.id), method: :delete if admin? %>

@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :find, except: :index
-  before_action :authorized?, except: [:index, :show]
+  before_action :authorize_admin, except: [:index, :show]
 
   def index
     @articles = Article.all.order("created_at desc")
@@ -15,7 +15,11 @@ class ArticlesController < ApplicationController
     @article.update(user_id: current_user.id)
     @article.update(pic: 'placeholder.jpg') unless @article.pic?
     if @article.save
+<<<<<<< HEAD
       User.spam(:article)
+=======
+      User.spam
+>>>>>>> email
       redirect_to article_path(@article.id), notice: "Posted #{@article.title}"
     else
       render :new, notice: "Put in some real error messages, Katie"
@@ -36,14 +40,14 @@ class ArticlesController < ApplicationController
     @article.destroy
     redirect_to articles_path, notice: "Deleted #{title}"
   end
-
-  def auth_error
-    unless authorized?
-      notice = "This needs a real error"
-      redirect = @article ? article_path(@article.id) : articles_path
-      redirect_to redirect, notice
-    end
-  end
+  #
+  # def auth_error
+  #   unless authorized?
+  #     notice = "This needs a real error"
+  #     redirect = @article ? article_path(@article.id) : articles_path
+  #     redirect_to redirect, notice
+  #   end
+  # end
 
   private
     def article_params
@@ -58,4 +62,6 @@ class ArticlesController < ApplicationController
       @article.pic
       # how to have this also return whether or not link is actually to a picture?
     end
+
+
 end
