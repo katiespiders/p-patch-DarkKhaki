@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :find, except: :index
+  before_action :find, only: [:show, :update, :destroy]
   before_action :authorize_admin, except: [:index, :show]
 
   def index

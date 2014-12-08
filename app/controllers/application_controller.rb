@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :admin?
 
+  def owner?(user)
+    current_user == user
+  end
+  helper_method :owner?
+
   def authorize_admin
     unless admin?
       redirect_to articles_path, notice: "You are not authorized to do that."
@@ -22,6 +27,12 @@ class ApplicationController < ActionController::Base
   def authorize_logged_in
     unless current_user
       redirect_to articles_path, notice: "You must be logged in to do that."
+    end
+  end
+
+  def authorize_owner(user_id)
+    unless owner?
+      redirect_to articles_path, notice: "That's not yours"
     end
   end
 

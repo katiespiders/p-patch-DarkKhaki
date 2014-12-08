@@ -7,10 +7,10 @@
 <body>
   <h1>All articles</h1>
   <%= link_to "Post new article", create_article_path if admin? %>
-  <ul>
+  <table class="table">
     <% @articles.each do |article| %>
-      <li><%= render 'shared/article_preview', obj: article %></li>
+      <%= render 'shared/article_preview', article: article %>
     <% end %>
-  </ul>
+  </table>
 </body>
 </html>

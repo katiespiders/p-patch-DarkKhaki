@@ -1,0 +1,2 @@
+<div class='comment'><h6><%= link_to commenter.username, user_path(commenter.id) %><small><%= comment.created_at.strftime(" posted at %l:%M %P on %a %-d %b %Y") %></small></h6>
+<p><%= comment.content %></p></div>

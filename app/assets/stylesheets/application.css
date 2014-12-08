@@ -55,6 +55,10 @@ header {
 
 .thumbnail {
   width: auto;
-  height: 48px;
-  display-style: inline;
+  height: 96px;
+}
+
+.thumbnail .tiny {
+  height: 60px;
+  float: right;
 }
