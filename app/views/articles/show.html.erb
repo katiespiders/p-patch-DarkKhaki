@@ -5,9 +5,12 @@
 </head>
 
 <body>
-  <%= render 'shared/article_preview', obj: @article %>
-</body>
-</html>
-
+  <h1><%= @article.title %><small> by <%= User.find(@article.user_id).username %><%= @article.created_at.strftime(" on %a, %e %B, %Y") %></small></h1>
 <%= link_to "Edit", edit_article_path(@article.id) if admin? %>
 <%= link_to "Delete", article_path(@article.id), method: :delete if admin? %>
+  <p>
+    <%= @article.content %>
+  </p>
+  <%= link_to "Back to articles index", articles_path %>
+</body>
+</html>

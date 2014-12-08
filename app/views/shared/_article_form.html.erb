@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Post new article</title>
-</head>
 
-<body>
   <table class="table">
   <%= form_for @article do |f| %>
   <tr>
     <td><%= f.label  :title %></td>
     <td><%= f.text_field :title %></td>
-    <td><%= title_error(@article) %>    </td>
+    <td><%= title_error(@article) %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :pic %></td>
+    <td><%= f.text_field :pic %></td>
+    <td>Optional; leave blank to get this lovely placeholder <%= image_tag 'placeholder.jpg', class: "thumbnail" %></td>
   </tr>
   <tr>
     <td><%= f.label :content %></td>
@@ -22,5 +21,3 @@
   </tr>
   <% end %>
   </table>
-</body>
-</html>

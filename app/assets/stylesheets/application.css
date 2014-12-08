@@ -52,3 +52,9 @@ header {
 }
 
 .alert { color: red; }
+
+.thumbnail {
+  width: auto;
+  height: 48px;
+  display-style: inline;
+}
