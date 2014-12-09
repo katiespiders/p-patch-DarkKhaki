@@ -6,27 +6,27 @@
 
 <body>
 
-  <%= form_for @user, url: users_path do |f|%>
+  <%= form_for @user, url: create_user_path do |f|%>
     <table class="table">
     <tr>
       <td><%= f.label :username %></td>
-      <td><%= f.text_field :username %> <%= error_field(@user, :username) %> </td>
+      <td><%= f.text_field :username %> <%= signin_error(@user, :username) %> </td>
     </tr>
     <tr>
       <td><%= f.label :email %></td>
-      <td><%= f.text_field :email %> <%= error_field(@user, :email) %></td>
+      <td><%= f.text_field :email %> <%= signin_error(@user, :email) %></td>
     </tr>
     <tr>
       <td><%= f.label :email_confirmation %></td>
-      <td><%= f.text_field :email_confirmation %> <%= error_field(@user, :email_confirmation) %></td>
+      <td><%= f.text_field :email_confirmation %> <%= signin_error(@user, :email_confirmation) %></td>
     </tr>
     <tr>
       <td><%= f.label :password %></td>
-      <td><%= f.password_field :password %> <%= error_field(@user, :password) %></td>
+      <td><%= f.password_field :password %> <%= signin_error(@user, :password) ? signin_error(@user, :password) : password_requirement %></td>
     </tr>
     <tr>
       <td><%= f.label :password_confirmation %></td>
-      <td><%= f.password_field :password_confirmation %></td> <%= error_field(@user, :password_confirmation) %>
+      <td><%= f.password_field :password_confirmation %></td> <%= signin_error(@user, :password_confirmation) %>
     </tr>
     <tr>
       <td colspan="3"><%= f.submit %></td>

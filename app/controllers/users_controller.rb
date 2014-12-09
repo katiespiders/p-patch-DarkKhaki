@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authorize_admin, only: [ :admin, :make_admin ]
+  before_filter :authorize_admin, only: [ :admin, :make_admin, :index ]
   before_filter :authorize_logged_in, only: :show
   before_filter :authorize_account_exists, only: :show
 
@@ -7,10 +7,13 @@ class UsersController < ApplicationController
   end
 
   def make_admin
-    raise
     user = User.find(params[:user])
     user.update(admin: true)
     redirect_to user
+  end
+
+  def index
+    @users = User.all
   end
 
   def new

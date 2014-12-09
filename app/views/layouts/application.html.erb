@@ -8,6 +8,8 @@
 </head>
 <body>
   <header>
+      <span id='weather'><%= image_tag weather_icon %>Weather is <%= conditions %> and <%= temperature %> at <%= observation_time %></span>
+
       <%= link_to "About", root_path %> |
       <%= link_to "Articles", articles_path %> |
       <%= link_to "Library", library_path %> |
@@ -16,7 +18,7 @@
       <%= link_to "Sign Out", session_path, method: :delete %>
     <% else %>
       <%= link_to "Sign In", sessions_path %> |
-      <%= link_to "Sign Up", users_path %>
+      <%= link_to "Sign Up", create_user_path %>
     <% end %>
 
 

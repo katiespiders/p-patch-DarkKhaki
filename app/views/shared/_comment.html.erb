@@ -1,0 +1,13 @@
+<div class='comment'>
+<h6><%= comment.byline %></h6>
+<small>
+  <%= link_to "Edit", edit_comment_path(comment.id) if owner?(comment.commenter) || admin? %>
+  <%= link_to "Delete", comment_path(comment.id), method: :delete if admin? %>
+</small>
+<p><%= comment.content %></p>
+<% unless comment.created_at == comment.updated_at %>
+  <small>Edited at <%= comment.edited_at %></small>
+<% end %>
+
+
+</div>

@@ -7,7 +7,7 @@
 
       <!--View and update Admin status for other users. Currently cannot remove admin status-->
       <% if current_user && current_user.admin %>
-        Admin Status: <%= @user.admin %>
+        <%= link_to "Do admin stuff", admin_path %>
         <% unless @user.admin %>
           <%= form_tag admin_path, method: :patch do %>
             <%= hidden_field_tag :user, params[:user], value: @user.id %>

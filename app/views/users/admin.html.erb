@@ -9,3 +9,16 @@
   <%= text_field_tag :name, params[:name], placeholder: "shovels" %>
   <%= submit_tag "Add Items" %>
 <% end %>
+
+<h2> Manage Shared Resources </h2>
+<!-- links to view all checked out items and all overdue items -->
+
+<h2> Your articles </h2>
+  <table class="table">
+  <% current_user.articles.order("created_at desc").take(5).each do |article| %>
+    <%= render 'shared/article_preview', article: article %>
+  <% end %>
+  </table>
+  <!-- link to view all  -->
+
+<h2> <%= link_to "Browse all users", users_path %></h2>

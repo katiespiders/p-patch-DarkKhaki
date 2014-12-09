@@ -29,14 +29,16 @@ group :development do
   gem 'binding_of_caller'
 end
 
-group :test do
+group :test, :development do
   gem 'rspec-rails'
+  gem 'dotenv-rails'
 end
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'dotenv-rails'
+gem 'resque'
+gem 'whenever'
 
 # Use unicorn as the app server
 # gem 'unicorn'

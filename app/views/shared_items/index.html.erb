@@ -7,13 +7,13 @@
     <th> Quantity </th>
   </tr>
   <% @item_hash.each do |name, quantity| %>
-    <tr>
-      <td> <%= name %> </td>
-      <td> <%=quantity %> </td>
+    <tr class="item_row">
+      <td class="item_name"> <%= name %> </td>
+      <td class="item_quantity"> <%=quantity %> </td>
 
       <%if current_user %>
         <td>
-          <%= form_tag :library, method: :patch do %>
+          <%= form_tag '/library/checkout', method: :post, class: "checkout_form" do %>
             <%= hidden_field_tag :name, params[:name], value: name %>
             <%= submit_tag "Check Out" %>
           <% end %>

@@ -5,6 +5,22 @@
 </head>
 
 <body>
-  <%= render 'shared/article_preview', obj: @article %>
+  <h1><%= @article.title %><small> <%= @article.byline %></small></h1>
+<%= link_to "Edit", edit_article_path(@article.id) if admin? %>
+<%= link_to "Delete", article_path(@article.id), method: :delete if admin? %>
+  <p>
+    <%= @article.content %>
+  </p>
+  <h5><%= @article.comments.count %> comments</h5>
+  <% @article.comments.each do |comment| %>
+    <%= render 'shared/comment', comment: comment, commenter: User.find(comment.user_id) %>
+  <% end %>
+  <% if current_user %>
+    <h5>Comment on this article</h5>
+    <%= render '/shared/comment_form', comment: Comment.new %>
+    <%= link_to "Back to articles index", articles_path %>
+  <% else %>
+    <%= link_to "Sign in to comment", sessions_path %>
+  <% end %>
 </body>
 </html>

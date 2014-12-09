@@ -1,25 +1,30 @@
-Rails.application.routes.draw do
+require 'resque/server'
 
-  root  'pages#about'
+Rails.application.routes.draw do
+  mount Resque::Server, at: '/resque'
+
+  root  'articles#index'
 
 ######### SESSIONS ROUTES
-  get     'sessions/new',     to: "sessions#new",     as: :sessions
-  post    'sessions/new',     to: "sessions#create"
-  delete  'sessions',         to: "sessions#destroy", as: :session
+  get     'sessions/new',     to: 'sessions#new',     as: :sessions
+  post    'sessions/new',     to: 'sessions#create'
+  delete  'sessions',         to: 'sessions#destroy', as: :session
 
 ######### USERS ROUTES
-  get     'users/new',        to: "users#new",        as: :users
-  post    'users/new',        to: "users#create"
-  get     'users/:id',        to: "users#show",       as: :user
-  get     'users/:id/edit',   to: "users#edit",       as: :edit_user
-  patch   'users/:id/',       to: "users#update"
-  delete  'users/:id',        to: "users#destroy"
+  get     'users/index',      to: 'users#index',      as: :users
+  get     'users/new',        to: 'users#new',        as: :create_user
+  post    'users/new',        to: 'users#create'
+  get     'users/:id',        to: 'users#show',       as: :user
+  get     'users/:id/edit',   to: 'users#edit',       as: :edit_user
+  patch   'users/:id/',       to: 'users#update'
+  delete  'users/:id',        to: 'users#destroy'
 
   get     '/admin',           to: 'users#admin',      as: :admin
-  patch   '/admin',           to: "users#make_admin"
+  patch   '/admin',           to: 'users#make_admin'
 
 ######### SHARED ITEMS ROUTES
   get '/library',             to: 'shared_items#index',     as: :library
+  post '/library/checkout',   to: 'shared_items#checkout',  as: :ajax_checkout
   post '/library',            to: 'shared_items#create'
   patch '/library',           to: 'shared_items#checkout'
 
@@ -32,10 +37,18 @@ Rails.application.routes.draw do
   patch   'articles/:id/',    to: 'articles#update'
   delete  'articles/:id',     to: 'articles#destroy'
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+######### COMMENTS ROUTES
+  get     'articles/:id/comments',      to: 'comments#index',  as: :comments
+  post    'articles/:id/comments',      to: 'comments#create'
+  get     'comments/:id',       to: 'comments#show', as: :comment
+  get     'comments/:id/edit',  to: 'comments#edit', as: :edit_comment
+  patch   'comments/:id',       to: 'comments#update'
+  delete  'comments/:id',       to: 'comments#destroy'
 
-  # You can have the root of your site routed with "root"
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with 'rake routes'.
+
+  # You can have the root of your site routed with 'root'
   # root 'welcome#index'
 
   # Example of regular route:

@@ -12,7 +12,7 @@ module ErrorHelper
   end
 
   # refactor all this bs
-  def error_field(obj, field)
+  def signin_error(obj, field)
     if obj.errors.any? && !obj.errors[field].empty?
       html = alert
       if field == :password || field == :password_confirmation
@@ -20,17 +20,17 @@ module ErrorHelper
       else
         html += "#{field_value(obj, field)}"
       end
-      html += "#{obj.errors[field].to_sentence}.</td>"
+      html += "#{obj.errors[field].to_sentence}.</small></td>"
       html.html_safe
     end
   end
 
   def title_error(obj)
-    (alert + "Title #{obj.errors[:title].to_sentence}").html_safe unless obj.errors[:title].empty?
+    (alert + "Title #{obj.errors[:title].to_sentence}</small>").html_safe unless obj.errors[:title].empty?
   end
 
   def content_error(obj)
-    (alert + "Content #{obj.errors[:content].to_sentence}").html_safe unless obj.errors[:content].empty?
+    (alert + "Content #{obj.errors[:content].to_sentence}</small>").html_safe unless obj.errors[:content].empty?
   end
 
   def password_requirement
@@ -43,6 +43,6 @@ module ErrorHelper
     end
 
     def alert
-      "<td><span class='alert'>*</span>"
+      "<td><span class='alert'>*</span><small>"
     end
 end
