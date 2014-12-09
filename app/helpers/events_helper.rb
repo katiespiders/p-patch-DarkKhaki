@@ -20,16 +20,23 @@ module EventsHelper
       @day_num = Time.days_in_month(@month, year)
     end
 
+    ### This is an array of data objects
     def make_days
-      (1..@day_num).collect do |day|
-        Day.new(Date.parse("#{@year}-#{@month}-#{day}")).box
+      month = (1..@day_num).collect do |day|
+        Day.new(Date.parse("#{@year}-#{@month}-#{day}"))
       end
+
+      month[0].date.wday.times { month.insert(0, Day.new(Date.new))}
+      month
     end
 
+    ### These return html
     def make_week(day_array, week_num)
-      day_num = (week_num-1) *7
-      # day_array[day_num, day_num+6].join('').html_safe
-      array_to_html(day_array[day_num..day_num+6])
+      day_num = (week_num-1) * 7
+
+      week_array = day_array[day_num...day_num + 7]
+      week_array.collect! { |day| day.box }
+      array_to_html(week_array)
     end
 
     def make_weeks(day_array)
@@ -39,7 +46,7 @@ module EventsHelper
       array_to_html(week_array)
     end
 
-    def  array_to_html(array)
+    def array_to_html(array)
       array.join('').html_safe
     end
 
@@ -69,6 +76,7 @@ module EventsHelper
   end
 
   class Day
+    attr_accessor :date
 
     def initialize(date)
       @date = date
@@ -78,7 +86,7 @@ module EventsHelper
       html = """
       <td>
         <div class= \"day_box\">
-          #{@date.day}
+          #{@date.year > 0 ? @date.day : ""}
         </div>
       </td>
       """
