@@ -48,6 +48,7 @@ Rails.application.routes.draw do
 ######### EVENTS ROUTES
 
   get     'calendar',          to: 'events#index',    as: :calendar
+  get     'events/:id',        to: 'events#show',     as: :event
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with 'rake routes'.
