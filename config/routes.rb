@@ -45,6 +45,10 @@ Rails.application.routes.draw do
   patch   'comments/:id',       to: 'comments#update'
   delete  'comments/:id',       to: 'comments#destroy'
 
+######### EVENTS ROUTES
+
+  get     'calendar',          to: 'events#index',    as: :calendar
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with 'rake routes'.
 
