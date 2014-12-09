@@ -83,12 +83,21 @@ module EventsHelper
       <td>
         <div class= \"day_box\">
           #{@date.year > 0 ? @date.day : ""}
+          #{events_html(@date)}
         </div>
       </td>
       """
       html.html_safe
     end
 
+    def events_html(date)
+      html = "<ul>"
+      Event.by_date(date).each do |event|
+        html += "<li><a href='events/#{event.id}'>#{event.title}</a></li>"
+      end
+      html += "</ul>"
+      html.html_safe
+    end
   end
 
 end
