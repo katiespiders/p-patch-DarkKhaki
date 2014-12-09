@@ -4,7 +4,7 @@
 
 <h3> Upcoming Events </h3>
 <% @upcoming_events.each do |event| %>
-  <%= event.title %>:
-  <%= pretty_event_time(event) %>
+  <h4><%= event.title %></h4>
+  <h5><%= pretty_event_time(event) %></h5>
   <%= event.description %>
 <% end %>
