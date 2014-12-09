@@ -49,7 +49,7 @@ module EventsHelper
     def table
       """
         <table>
-          <tr> <th colspan='7'> #{Date::MONTHNAMES[@month]} </th> </tr>
+          <tr> <th colspan='7'> <h3> #{Date::MONTHNAMES[@month]}<h3> </th> </tr>
           <tr> #{days_of_week} </tr>
           #{make_weeks(make_days)}
 
