@@ -4,10 +4,6 @@ module EventsHelper
     Day.new(date).box
   end
 
-  # def make_month(date)
-  #   Calendar.new(date.month, date.year).make_days
-  # end
-
   def display_calendar(date)
     Cal.new(date.month, date.year).table
   end
@@ -20,7 +16,7 @@ module EventsHelper
       @day_num = Time.days_in_month(@month, year)
     end
 
-    ### This is an array of data objects
+    ### This is an array of day objects
     def make_days
       month = (1..@day_num).collect do |day|
         Day.new(Date.parse("#{@year}-#{@month}-#{day}"))
@@ -30,7 +26,7 @@ module EventsHelper
       month
     end
 
-    ### These return html
+    ### These generate html
     def make_week(day_array, week_num)
       day_num = (week_num-1) * 7
 
