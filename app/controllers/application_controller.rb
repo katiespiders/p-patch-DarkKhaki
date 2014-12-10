@@ -39,14 +39,10 @@ class ApplicationController < ActionController::Base
 
 ##### SUPER HACKY WEATHER METHODS
   def weather_helper
-    if current?
-      puts "-"*80, "no call"
-    else
-      puts "-"*80, "calling weather underground"
+    unless current?
       weather = Weather.new
       session[:weather_data] = weather.stored_hash
     end
-    # puts "%"*80, weather_hash.inspect
     weather_hash
   end
 

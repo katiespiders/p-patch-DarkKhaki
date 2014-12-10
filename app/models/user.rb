@@ -11,11 +11,6 @@ class User < ActiveRecord::Base
 
   def self.spam(task)
     self.all.each { |user| Resque.enqueue(EmailJob, user.email) }
-    puts """
-    ********************************************
-    INSIDE SPAM
-    *******************************************
-    """
   end
 
   def profile_link
