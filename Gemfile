@@ -38,7 +38,7 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'resque'
+gem 'resque', '~> 1.22.0'
 gem 'whenever'
 
 # Use unicorn as the app server
