@@ -18,6 +18,7 @@ gem 'rails_12factor', group: :production
 gem 'redis'
 
 gem 'heroku_resque_autoscaler'
+gem 'heroku_api', '~> 0.3.5'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
