@@ -17,6 +17,8 @@ gem 'rails_12factor', group: :production
 
 gem 'redis'
 
+gem 'heroku_resque_autoscaler'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
