@@ -15,7 +15,7 @@ module EventsHelper
     html = "#{pretty(start)}"
 
     if start.to_date == finish.to_date
-      html += " until #{pretty(finish)[-7]}"
+      html += " until #{pretty(finish)[-7..-1]}"
     else
       html += " to #{pretty(finish)}"
     end
