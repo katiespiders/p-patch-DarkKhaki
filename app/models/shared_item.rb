@@ -5,12 +5,12 @@ class SharedItem < ActiveRecord::Base
 
   def self.create_many(name, quantity)
     if quantity <= 0
-      item = SharedItem.create(name: name)
+      item = SharedItem.create(name: name, pending: false)
       item.errors.messages[:quantity] = ["must be greater than 0"]
       return item
     end
     quantity.times do |f|
-      item = SharedItem.create(name: name)
+      item = SharedItem.create(name: name, pending: false)
       unless item.valid?
         return item
       end
