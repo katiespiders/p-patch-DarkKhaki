@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   post '/library/checkout',   to: 'shared_items#checkout',  as: :ajax_checkout
   post '/library',            to: 'shared_items#create'
   patch '/library',           to: 'shared_items#checkout'
-
+  patch '/return',            to: 'shared_items#update',    as: :return
 ######### ARTICLES ROUTES
   get     'articles',         to: 'articles#index',   as: :articles
   post    'articles',         to: 'articles#create'

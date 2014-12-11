@@ -16,6 +16,13 @@ class SharedItemsController < ApplicationController
     end
   end
 
+  #good candidate for Ajax!
+  def update
+    item = SharedItem.find_by(name: params[:name], user_id: params[:user_id])
+    item.update(pending: true)
+    redirect_to User.find(params[:user_id])
+  end
+
   def checkout
     item = SharedItem.find_by(name: params[:name], user_id: nil)
     item.update(user_id: current_user.id, due: Date.today+7.days)

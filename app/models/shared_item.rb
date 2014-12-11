@@ -36,14 +36,15 @@ class SharedItem < ActiveRecord::Base
     end
   end
 
-
   private
 
   def self.users_items_hash(user)
     users_items = {}
     user.shared_items.each do |item|
-      unique_key = item.name+"**_**"+item.due.to_date.to_s
-      add_to_hash(users_items, unique_key)
+      unless item.pending
+        unique_key = item.name+"**_**"+item.due.to_date.to_s
+        add_to_hash(users_items, unique_key)
+      end
     end
     users_items
   end
