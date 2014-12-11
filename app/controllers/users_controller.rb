@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_filter :authorize_account_exists, only: :show
 
   def admin
+    @pending_items = SharedItem.where(pending: true)
   end
 
   def make_admin
