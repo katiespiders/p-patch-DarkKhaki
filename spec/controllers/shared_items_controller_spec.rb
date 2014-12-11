@@ -25,4 +25,15 @@ describe SharedItemsController, :type => :controller do
     end
   end
 
+  describe '#confirm_return' do
+    it "sets item's user_id to nil, due to nil and pending to false" do
+      user.update(admin: true)
+      item.update(user_id: user.id, pending: true)
+      patch :confirm_return, { shared_item: {id: item.id, user_id: nil, pending: false, due: nil} }
+      expect(item.reload.pending).to be false
+      expect(item.reload.user_id).to be nil
+      expect(item.reload.due).to be nil
+    end
+  end
+
 end
