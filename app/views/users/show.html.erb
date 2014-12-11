@@ -40,7 +40,6 @@
             <td>
               <%= form_tag return_path, method: :patch do %>
                 <%= hidden_field_tag :name, params[:name], value: @items[0][0] %>
-                <%= hidden_field_tag :user_id, params[:user_id], value: @user.id %>
                 <%= submit_tag "Return" %>
               <% end %>
             </td>

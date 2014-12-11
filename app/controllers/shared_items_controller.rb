@@ -25,7 +25,7 @@ class SharedItemsController < ApplicationController
 
   #good candidate for Ajax!
   def set_pending
-    item = SharedItem.find_by(name: params[:name], user_id: params[:user_id])
+    item = SharedItem.find_by(name: params[:name], user_id: current_user.id)
     if item
       item.update(pending: true)
       redirect_to current_user
