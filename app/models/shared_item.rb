@@ -5,16 +5,20 @@ class SharedItem < ActiveRecord::Base
 
   def self.create_many(name, quantity)
     if quantity <= 0
-      item = SharedItem.create(name: name)
+      item = SharedItem.create(name: name, pending: false)
       item.errors.messages[:quantity] = ["must be greater than 0"]
       return item
     end
     quantity.times do |f|
-      item = SharedItem.create(name: name)
+      item = SharedItem.create(name: name, pending: false)
       unless item.valid?
         return item
       end
     end
+  end
+
+  def self.overdue_items
+    SharedItem.where("due < ? and user_id IS NOT NULL", Date.today)
   end
 
   def self.available_item_hash
@@ -27,25 +31,30 @@ class SharedItem < ActiveRecord::Base
     item_hash
   end
 
-  def self.users_items_array(user)
-    hash = users_items_hash(user)
-    hash.collect do |k, v|
-      name, date = k.split('**_**')
-      quantity = v
-      [name, date, quantity]
-    end
+  def self.users_items_array(user, pending_items)
+    split_hash(users_items_hash(user, pending_items))
   end
 
 
   private
 
-  def self.users_items_hash(user)
+  def self.users_items_hash(user, pending_items)
     users_items = {}
     user.shared_items.each do |item|
-      unique_key = item.name+"**_**"+item.due.to_date.to_s
-      add_to_hash(users_items, unique_key)
+      if item.pending == pending_items
+        unique_key = item.name+"**_**"+item.due.to_date.to_s
+        add_to_hash(users_items, unique_key)
+      end
     end
     users_items
+  end
+
+  def self.split_hash(hash)
+    hash.collect do |k, v|
+      name, date = k.split('**_**')
+      quantity = v
+      [name, date, quantity]
+    end
   end
 
   def self.add_to_hash(hash, item)

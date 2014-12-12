@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   before_filter :authorize_account_exists, only: :show
 
   def admin
+    @pending_items = SharedItem.where(pending: true)
+    @overdue_items = SharedItem.overdue_items
   end
 
   def make_admin
@@ -22,7 +24,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @items = SharedItem.users_items_array(@user).sort_by { |array| array[1] }
+    @items = SharedItem.users_items_array(@user, false).sort_by { |array| array[1] }
+    @pending_items = SharedItem.users_items_array(@user, true).sort_by { |array| array[1] }
   end
 
   def create
