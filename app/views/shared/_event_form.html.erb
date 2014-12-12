@@ -1,27 +1,29 @@
-<%= form_tag event do %>
+<% method = event.id ? :patch : :post %>
+<%= form_tag event, method: method do %>
   <table>
     <tr>
       <td><%= label_tag 'event[title]', "Event" %></td>
-      <td><%= text_field_tag 'event[title]' %></td>
+      <td><%= text_field_tag 'event[title]', event.title %></td>
     </tr>
     <tr>
       <td><%= label_tag 'event[description]', "Details" %></td>
-      <td><%= text_area_tag 'event[description]' %></td>
+      <td><%= text_area_tag 'event[description]', event.description %></td>
     </tr>
     <tr>
       <td><%= label_tag 'event[start_date]', 'Starts on' %></td>
-      <td><%= date_field_tag 'event[start_date]', Date.today %></td>
+      <td><%= date_field_tag 'event[start_date]', event.start_date_default %></td>
       <td><%= label_tag 'event[start_time]', 'at' %></td>
-      <td><%= time_field_tag 'event[start_time]', '11:00:00' %></td>
+      <td><%= time_field_tag 'event[start_time]', event.start_time_default %></td>
     </tr>
     <tr>
       <td><%= label_tag 'event[end_date]', 'Ends on' %></td>
-      <td><%= date_field_tag 'event[end_date]', Date.today %></td>
+      <td><%= date_field_tag 'event[end_date]', event.end_date_default %></td>
       <td><%= label_tag 'event[end_time]', 'at' %></td>
-      <td><%= time_field_tag 'event[end_time]', '15:00:00' %></td>
+      <td><%= time_field_tag 'event[end_time]', event.end_time_default %></td>
     </tr>
     <tr>
       <td colspan="3"><%= submit_tag %></td>
     </tr>
   </table>
 <% end %>
+<%= link_to "Back to calendar", calendar_path %>

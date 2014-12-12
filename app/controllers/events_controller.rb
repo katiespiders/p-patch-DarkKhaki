@@ -1,12 +1,15 @@
 class EventsController < ApplicationController
   before_action :find_event, except: [:index, :new]
+  before_action only: [:update, :destroy] do
+    authorize_owner(session[:current_user])
+  end
 
   def new
     @event = Event.new
   end
 
   def index
-    @upcoming_events = Event.days_in_future(7)  
+    @upcoming_events = Event.days_in_future(7)
   end
 
   def show
@@ -22,6 +25,21 @@ class EventsController < ApplicationController
     end
   end
 
+  def update
+    @event.update(event_params)
+    if @event.save
+      redirect_to calendar_path, notice: "#{@event.title.capitalize} has been edited"
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    title = @event.title.capitalize
+    @event.destroy
+    redirect_to calendar_path, notice: "#{title} has been deleted"
+  end
+
   private
     def event_params
       data = params.require(:event).permit(:title, :description, :start_date, :end_date, :start_time, :end_time)
@@ -29,7 +47,8 @@ class EventsController < ApplicationController
         title: data[:title],
         description: data[:description],
         start_time: parse_datetime(data[:start_date], data[:start_time]),
-        end_time: parse_datetime(data[:end_date], data[:end_time])
+        end_time: parse_datetime(data[:end_date], data[:end_time]),
+        user_id: session[:current_user]
       }
     end
 

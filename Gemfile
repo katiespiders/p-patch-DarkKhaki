@@ -17,6 +17,9 @@ gem 'rails_12factor', group: :production
 
 gem 'redis'
 
+gem 'heroku_resque_autoscaler'
+gem 'heroku-api', "~> 0.3.5"
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -40,7 +43,7 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'resque', '~> 1.22.0'
+gem 'resque', '~> 1.23.0'
 gem 'whenever'
 
 # Use unicorn as the app server

@@ -11,7 +11,7 @@
   <p>
     <%= @article.content %>
   </p>
-  <h5><%= @article.comments.count %> comments</h5>
+  <h5><%= @article.comments_string %></h5>
   <% @article.comments.each do |comment| %>
     <%= render 'shared/comment', comment: comment, commenter: User.find(comment.user_id) %>
   <% end %>

@@ -1,2 +1,4 @@
-<h1><%= @event.title %></h1>
+<h1><%= @event.title %></h1><small> <%= pretty_event_time(@event) %></small>
 <p><%= @event.description %></p>
+<%= link_to "Edit", edit_event_path(@event.id)  if owner?(current_user) %>
+<%= link_to "Delete", event_path(@event.id), method: :delete if owner?(current_user) %>
