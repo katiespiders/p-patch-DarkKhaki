@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'rails_12factor', group: :production
 
 gem 'redis'
+# gem 'rubygems'
+gem 'api_cache'
 
 gem 'heroku_resque_autoscaler'
 gem 'heroku-api', "~> 0.3.5"
