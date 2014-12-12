@@ -9,10 +9,59 @@
   <%= text_field_tag :name, params[:name], placeholder: "shovels" %>
   <%= submit_tag "Add Items" %>
 <% end %>
+<div class="row">
+  <h2> Manage Shared Resources </h2>
+  <!-- links to view all checked out items and all overdue items -->
+  <div class="col-sm-5">
+    <h3> Returned Items </h3>
+      <table class ="table table-hover">
+        <thread>
+          <tr>
+            <th> Item </th>
+            <th> Returned by </th>
+            <th>ID tag </th>
+          </tr>
+        </thread>
+          <% @pending_items.each do |item| %>
+        <tr>
+            <td> <%= item.name %> </td>
+            <td> <%= item.user.username %> </td>
+            <td> <%= item.id %> </td>
+            <td>
+              <%= form_for item, url: confirm_return_path do |f| %>
+                <%= f.hidden_field :pending, value: false %>
+                <%= f.hidden_field :user_id, value: nil %>
+                <%= f.hidden_field :due, value: nil %>
+                <%= f.hidden_field :id, value: item.id %>
+                <%= f.submit "Confirm Returned" %>
+              <% end %>
+            </td>
+        </tr>
+        <% end %>
+      </table>
+  </div>
+  <div class="col-sm-5">
+    <h3> Overdue Items </h3>
+    <table class ="table table-hover">
+      <thread>
+        <tr>
+          <th> Item </th>
+          <th> Borrowed by </th>
+          <th>ID tag </th>
+        </tr>
+      </thread>
+      <% @overdue_items.each do |item| %>
+        <tr>
+          <td> <%= item.name %> </td>
+          <td> <%= item.user.username %> </td>
+          <td> <%= item.id %> </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div> <!--manage items row-->
 
-<h2> Manage Shared Resources </h2>
-<!-- links to view all checked out items and all overdue items -->
-
+<%= link_to "See all borrowed items", checked_items_path %>
 <h2> Your articles </h2>
   <table class="table">
   <% current_user.articles.order("created_at desc").take(5).each do |article| %>
