@@ -27,30 +27,7 @@ module EventsHelper
     time.strftime('%a, %b %e at %l:%M %P')
   end
 
-  # def pretty_event_time(event)
-  #   start_hash = time_attr_hash(event.start_time)
-  #   finish_hash = time_attr_hash(event.end_time)
-  #   html ="""
-  #         #{start_hash[:wkday]}, #{start_hash[:month]} #{start_hash[:day_num]}
-  #         #{start_hash[:hour]}:#{start_hash[:minute]} #{start_hash[:meridian]}
-  #         """
-  #   if event.start_time.to_date == event.end_time.to_date
-  #     html += "- #{finish_hash[:hour]}:#{finish_hash[:minute]} #{finish_hash[:meridian]}"
-  #   else
-  #     html += "#{finish_hash[:wkday]}, #{finish_hash[:month]} #{finish_hash[:day_num]} - #{finish_hash[:hour]}: #{finish_hash[:minute]} #{finish_hash[:meridian]}"
-  #   end
-  #   puts "*"*80, html
-  #   html.html_safe
-  # end
-  #
-  # def time_attr_hash(date)
-  #   pieces = { wkday: "%a", month: "%b", day_num: "%e", hour: "%l", minute: "%M", meridian: "%P" }
-  #   time_hash = {}
-  #   pieces.each do |attribute, access_code|
-  #     time_hash[attribute] = date.strftime(access_code)
-  #   end
-  #   return time_hash
-  # end
+
 
   class Calendar
 
@@ -92,7 +69,7 @@ module EventsHelper
 
     def table
       """
-        <table>
+        <table class= 'table calendar'>
           <tr> <th colspan='7'> <h3> #{Date::MONTHNAMES[@month]}<h3> </th> </tr>
           <tr> #{days_of_week} </tr>
           #{make_weeks(make_days)}
@@ -125,10 +102,10 @@ module EventsHelper
     def box
       html = """
       <td>
-        <div class= \"day_box\">
+
           #{@date.year > 0 ? @date.day : ""}
           #{events_html(@date)}
-        </div>
+
       </td>
       """
       html.html_safe
