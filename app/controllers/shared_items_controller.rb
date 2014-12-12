@@ -17,6 +17,10 @@ class SharedItemsController < ApplicationController
     end
   end
 
+  def checked_out_index
+    @items = SharedItem.where.not(user_id: nil)
+  end
+
   def confirm_return
     item = SharedItem.find(params[:shared_item][:id])
     item.update(params.require(:shared_item).permit(:user_id, :pending, :due))

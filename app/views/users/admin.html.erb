@@ -12,7 +12,7 @@
 <div class="row">
   <h2> Manage Shared Resources </h2>
   <!-- links to view all checked out items and all overdue items -->
-  <div class="col-sm-3">
+  <div class="col-sm-5">
     <h3> Returned Items </h3>
       <table class ="table table-hover">
         <thread>
@@ -22,8 +22,8 @@
             <th>ID tag </th>
           </tr>
         </thread>
-        <tr>
           <% @pending_items.each do |item| %>
+        <tr>
             <td> <%= item.name %> </td>
             <td> <%= item.user.username %> </td>
             <td> <%= item.id %> </td>
@@ -40,17 +40,28 @@
         <% end %>
       </table>
   </div>
-  <div class="col-sm-3">
+  <div class="col-sm-5">
     <h3> Overdue Items </h3>
-      <table>
-      </table>
-  </div>
-  <div class="col-sm-3">
-    <h3> All Items </h3>
-      <table>
-      </table>
+    <table class ="table table-hover">
+      <thread>
+        <tr>
+          <th> Item </th>
+          <th> Borrowed by </th>
+          <th>ID tag </th>
+        </tr>
+      </thread>
+      <% @overdue_items.each do |item| %>
+        <tr>
+          <td> <%= item.name %> </td>
+          <td> <%= item.user.username %> </td>
+          <td> <%= item.id %> </td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 </div> <!--manage items row-->
+
+<%= link_to "See all borrowed items", checked_items_path %>
 <h2> Your articles </h2>
   <table class="table">
   <% current_user.articles.order("created_at desc").take(5).each do |article| %>

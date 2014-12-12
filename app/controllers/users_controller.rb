@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def admin
     @pending_items = SharedItem.where(pending: true)
+    @overdue_items = SharedItem.overdue_items
   end
 
   def make_admin

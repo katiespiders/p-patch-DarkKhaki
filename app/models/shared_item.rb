@@ -17,6 +17,10 @@ class SharedItem < ActiveRecord::Base
     end
   end
 
+  def self.overdue_items
+    SharedItem.where("due < ? and user_id IS NOT NULL", Date.today)
+  end
+
   def self.available_item_hash
     item_hash = {}
     SharedItem.all.each do |item|
