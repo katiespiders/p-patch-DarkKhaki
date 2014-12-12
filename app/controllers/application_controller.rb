@@ -41,53 +41,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
-##### SUPER HACKY WEATHER METHODS
+##### NOT SO HACKY WEATHER METHODS
   def weather_helper
-    unless current?
-      weather = Weather.new
-      session[:weather_data] = weather.stored_hash
-    end
-    weather_hash
+    Weather.new.stored_hash
   end
-
-  def weather_hash
-    session[:weather_data]
-  end
-
-  def current?
-    if weather_hash
-      # puts weather_hash.inspect, "GODDAMNIT ARE YOU FUCKING WITH ME?"
-      if weather_hash[:time]
-        # puts "NOW IT'S A SYMBOL!"
-        weather_hash[:time] > cutoff
-      elsif weather_hash["time"] # this is necessary because rails is blatantly just fucking with me
-        # puts "NOW IT'S A STRING!"
-        weather_hash["time"] > cutoff
-      end
-    end
-  end
-
-  def cutoff
-    Time.now - 10.minutes
-  end
-
-  def time_string(time)
-    if time.class == DateTime
-      time.strftime('%l:%M %P')
-    elsif time.class == String
-      DateTime.parse(time).strftime('%l:%M %P')
-    end
-  end
-
-  def observation_time # I don't know WTF is happening here. Rails is fucking with me
-    if time = weather_helper["time"]
-      time_string(time)
-    elsif time = weather_helper[:time]
-      time_string(time)
-    end
-  end
-  helper_method :observation_time
 
   def temperature
     weather_helper["temp"]
@@ -104,5 +61,43 @@ class ApplicationController < ActionController::Base
   end
   helper_method :weather_icon
 
-
 end
+
+##### SUPER HACKY WEATHER METHODS
+  # def weather_hash
+  #   session[:weather_data]
+  # end
+  #
+  # def current?
+  #   if weather_hash
+  #     # puts weather_hash.inspect, "GODDAMNIT ARE YOU FUCKING WITH ME?"
+  #     if weather_hash[:time]
+  #       # puts "NOW IT'S A SYMBOL!"
+  #       weather_hash[:time] > cutoff
+  #     elsif weather_hash["time"] # this is necessary because rails is blatantly just fucking with me
+  #       # puts "NOW IT'S A STRING!"
+  #       weather_hash["time"] > cutoff
+  #     end
+  #   end
+  # end
+  #
+  # def cutoff
+  #   Time.now - 10.minutes
+  # end
+  #
+  # def time_string(time)
+  #   if time.class == DateTime
+  #     time.strftime('%l:%M %P')
+  #   elsif time.class == String
+  #     DateTime.parse(time).strftime('%l:%M %P')
+  #   end
+  # end
+  #
+  # def observation_time # I don't know WTF is happening here. Rails is fucking with me
+  #   if time = weather_helper["time"]
+  #     time_string(time)
+  #   elsif time = weather_helper[:time]
+  #     time_string(time)
+  #   end
+  # end
+  # helper_method :observation_time

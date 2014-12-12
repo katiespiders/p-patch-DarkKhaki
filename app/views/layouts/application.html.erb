@@ -8,7 +8,7 @@
 </head>
 <body>
   <header>
-      <span id='weather'><%= image_tag weather_icon %>Weather is <%= conditions %> and <%= temperature %> at <%= observation_time %></span>
+      <span id='weather'> <%= image_tag weather_icon %> Right now: <%= conditions %>, <%= temperature %>&deg; F</span>
 
       <%= link_to "About", root_path %> |
       <%= link_to "Articles", articles_path %> |

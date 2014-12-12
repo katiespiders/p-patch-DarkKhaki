@@ -1,11 +1,12 @@
-require "httparty"
+require "api_cache"
+require "json"
 
 class Weather
+  attr_accessor :stored_hash
 
   def initialize
-    # need to queue this & also figure out how to display weather while waiting
-    @sun_hash = HTTParty.get(astronomy_url)["sun_phase"]
-    @api_hash = HTTParty.get(weather_url)
+    @sun_hash = JSON.parse(APICache.get(astronomy_url))["sun_phase"]
+    @api_hash = JSON.parse(APICache.get(weather_url))
     @api_hash["sunrise"] = sun_time("sunrise")
     @api_hash["sunset"] = sun_time("sunset")
   end
