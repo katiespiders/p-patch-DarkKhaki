@@ -43,8 +43,13 @@ header #weather {
 }
 
 .abt_cont {
-  margin: 10%;
+  margin: 50px;
+  padding: 50px;
   background-color: rgba(255,255,255,0.6);
+}
+
+.abt_cont h1 {
+  margin: 0;
 }
 
 .col {
