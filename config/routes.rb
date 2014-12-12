@@ -3,7 +3,9 @@ require 'resque/server'
 Rails.application.routes.draw do
   mount Resque::Server, at: '/resque'
 
-  root  'articles#index'
+  root  'pages#landing'
+
+  get 'about',               to: 'pages#about',       as: :about
 
 ######### SESSIONS ROUTES
   get     'sessions/new',     to: 'sessions#new',     as: :sessions
@@ -19,15 +21,17 @@ Rails.application.routes.draw do
   patch   'users/:id/',       to: 'users#update'
   delete  'users/:id',        to: 'users#destroy'
 
-  get     '/admin',           to: 'users#admin',      as: :admin
-  patch   '/admin',           to: 'users#make_admin'
+  get     'admin',           to: 'users#admin',      as: :admin
+  patch   'admin',           to: 'users#make_admin'
 
 ######### SHARED ITEMS ROUTES
-  get '/library',             to: 'shared_items#index',     as: :library
-  post '/library/checkout',   to: 'shared_items#checkout',  as: :ajax_checkout
-  post '/library',            to: 'shared_items#create'
-  patch '/library',           to: 'shared_items#checkout'
-
+  get 'library',             to: 'shared_items#index',     as: :library
+  post 'library/checkout',   to: 'shared_items#checkout',  as: :ajax_checkout
+  post 'library',            to: 'shared_items#create'
+  patch 'library',           to: 'shared_items#checkout'
+  patch '/return',            to: 'shared_items#set_pending',    as: :return
+  patch '/confirm_return',    to: 'shared_items#confirm_return', as: :confirm_return
+  get   '/checked_out_tools', to: 'shared_items#checked_out_index', as: :checked_items
 ######### ARTICLES ROUTES
   get     'articles',         to: 'articles#index',   as: :articles
   post    'articles',         to: 'articles#create'

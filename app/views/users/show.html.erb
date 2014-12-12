@@ -6,7 +6,7 @@
     <p> email: <%= @user.email %> </p>
 
       <!--View and update Admin status for other users. Currently cannot remove admin status-->
-      <% if current_user && current_user.admin %>
+      <% if admin? %>
         <%= link_to "Do admin stuff", admin_path %>
         <% unless @user.admin %>
           <%= form_tag admin_path, method: :patch do %>
@@ -20,7 +20,7 @@
 <div class="row">
 
   <div class="col-sm-5">
-  <!--View your checked out tools, sorted by due date-->
+  <!--View user's checked out tools, sorted by due date-->
     <h3> Stuff </h3>
     <table class ="table table-hover">
       <thread>
@@ -34,9 +34,29 @@
         <tr class = <%= Date.parse(array[1]).past? ? "past_due" : "not_due" %>  >
           <% array.each do |attribute| %>
             <td> <%= attribute %> </td>
+          <% end %> <!-- End array.each-->
+
+          <% if owner?(@user) %>
+          <!--Return items if you are on your own page-->
+            <td>
+              <%= form_tag return_path, method: :patch do %>
+                <%= hidden_field_tag :name, params[:name], value: array[0] %>
+                <%= submit_tag "Return" %>
+              <% end %> <!-- End "Return" button-->
+            </td>
+
+          <% end %> <!-- End "if owner" -->
+      <% end %> <!--End @items iteration-->
+
+      <% @pending_items.each do |array| %>
+        <tr class = <%= Date.parse(array[1]).past? ? "past_due" : "not_due" %>  >
+          <% array.each do |attribute| %>
+            <td> <%= attribute %> </td>
           <% end %>
+          <td> Return Pending </td>
         </tr>
       <% end %>
+
     </table>
   </div> <!-- ends tools col -->
 
