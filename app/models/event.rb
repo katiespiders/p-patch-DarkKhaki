@@ -11,4 +11,19 @@ class Event < ActiveRecord::Base
     all.where("start_time > ? AND start_time < ?", today, week_later)
   end
 
+  def start_date_default
+    start_time ? start_time.to_date : Date.today
+  end
+
+  def end_date_default
+    end_time ? end_time.to_date : Date.today
+  end
+
+  def start_time_default
+    start_time ? start_time.strftime('%H:%M') : '11:00'
+  end
+
+  def end_time_default
+    end_time ? end_time.strftime('%H:%M') : '15:00'
+  end
 end

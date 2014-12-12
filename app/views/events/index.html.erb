@@ -1,10 +1,10 @@
-<h1> Calendar </h1>
+<h1> Calendar </h1><%= link_to "Add event", create_event_path if logged_in? %>
 
 <%= display_calendar(Date.today) %>
 
 <h3> Upcoming Events </h3>
 <% @upcoming_events.each do |event| %>
-  <h4><%= event.title %></h4>
+  <h4><%= link_to event.title, event_path(event.id) %></h4><%= link_to "Edit", edit_event_path(event.id) if owner?(current_user) %> <%= link_to "Delete", event_path(event.id), method: :delete if owner?(current_user) %>
   <h5><%= pretty_event_time(event) %></h5>
   <%= event.description %>
 <% end %>

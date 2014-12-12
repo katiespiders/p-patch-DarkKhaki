@@ -18,6 +18,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :owner?
 
+  def logged_in?
+    !current_user.nil?
+  end
+  helper_method :logged_in?
+
   def authorize_admin
     unless admin?
       redirect_to articles_path, notice: "You are not authorized to do that."
@@ -31,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_owner(user_id)
-    unless owner? || admin?
+    unless owner?(User.find(user_id)) || admin?
       redirect_to articles_path, notice: "That's not yours"
     end
   end
