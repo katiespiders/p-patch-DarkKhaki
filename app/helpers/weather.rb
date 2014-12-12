@@ -33,7 +33,7 @@ class Weather
   def sun_time(which)
     hour = @sun_hash[which]["hour"].to_i
     minute = @sun_hash[which]["minute"].to_i
-    timestamp + hour.hours + minute.minutes
+    timestamp_date + hour.hours + minute.minutes
   end
 
   def daytime?
