@@ -1,6 +1,5 @@
 <h1> Calendar </h1><%= link_to "Add event", create_event_path if logged_in? %>
 
-<%= display_calendar(Date.today) %>
 
 <h3> Upcoming Events </h3>
 <% @upcoming_events.each do |event| %>
@@ -8,3 +7,4 @@
   <h5><%= pretty_event_time(event) %></h5>
   <%= event.description %>
 <% end %>
+<%= display_calendar(Date.today) %>
