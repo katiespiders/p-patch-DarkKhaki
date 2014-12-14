@@ -6,11 +6,12 @@ Rails.application.routes.draw do
   root  'pages#landing'
 
   get 'about',               to: 'pages#about',       as: :about
-
+  get 'home',                to: 'pages#home',        as: :home
 ######### SESSIONS ROUTES
   get     'sessions/new',     to: 'sessions#new',     as: :sessions
   post    'sessions/new',     to: 'sessions#create'
   delete  'sessions',         to: 'sessions#destroy', as: :session
+  get     '/signout',         to: 'sessions#destroy', as: :sign_out
 
 ######### USERS ROUTES
   get     'users/index',      to: 'users#index',      as: :users

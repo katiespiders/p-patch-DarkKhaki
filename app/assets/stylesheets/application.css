@@ -14,6 +14,16 @@
  *= require_self
  */
 
+.weather-pic img {
+  height: 100px;
+  width: 100px;
+  border-radius: 20%;
+}
+
+.right {
+  float: right;
+}
+
 .container {
   padding-top: 10px;
   padding-left: 7%;

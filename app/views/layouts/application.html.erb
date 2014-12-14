@@ -4,33 +4,53 @@
   <title>Bpatch</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'bootstrap' %>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <header>
-      <span id='weather'><%= image_tag weather_icon %>Weather is <%= conditions %> and <%= temperature %> at <%= observation_time %></span>
 
-      <%= link_to "About", root_path %> |
-      <%= link_to "Articles", articles_path %> |
-      <%= link_to "Library", library_path %> |
-      <%= link_to "Calendar", calendar_path %> |
-    <% if current_user %>
-      <%= link_to "Account", current_user %> |
-      <%= link_to "Sign Out", session_path, method: :delete %>
-    <% else %>
-      <%= link_to "Sign In", sessions_path %> |
-      <%= link_to "Sign Up", create_user_path %>
-    <% end %>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
 
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand">
+          <%= link_to "BEEZ", root_path, class: "navbar-brand" %>
+      </div>
+    </div>
 
-  </header>
-  <!-- flash message provided by rails-->
-  <!-- <div class="flash">
-    <% flash.each do |name, msg| %>
-    <%= content_tag :div, msg, id: "flash_#{name}" %>
-    <% end %>
-  </div> -->
+      <div class="collapse navbar-collapse right" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+
+          <li class="active">
+            <% if current_user %>
+              <li><%= link_to current_user.username, current_user %></li>
+              <li><%= link_to 'Sign Out', sign_out_path %></li>
+            <% else %>
+              <li> <%= link_to "Sign In", sessions_path %>  </li>
+            <% end %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Resources <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li> <%= link_to "News", articles_path %> </li>
+              <li> <%= link_to "Library", library_path %> </li>
+              <li> <%= link_to "Calendar", calendar_path %> </li>
+              <% if admin? %>
+                <li><%= link_to 'ADMIN', admin_path %></li>
+              <% end %>
+            </ul>
+          </li> <!-- ends li class dropdown -->
+        </ul> <!-- ends ul class nav navbar-nav -->
+      </div>
+    </div>
+  </nav>
+
   <div class= "container">
     <%= flash[:notice] %>
     <%= yield %>
