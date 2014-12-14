@@ -13,11 +13,11 @@ class Comment < ActiveRecord::Base
   end
 
   def timestamp
-    created_at.strftime('%l:%M %P on %a %-d %b %Y')
+    created_at.strftime('%l:%M %P on %a, %-d %b, %Y')
   end
 
   def edited_at
-    updated_at.strftime('%l:%M %P on %a %-d %b %Y')
+    updated_at.strftime('%l:%M %P on %a, %-d %b, %Y')
   end
 
   def byline
