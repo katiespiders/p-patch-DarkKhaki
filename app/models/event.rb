@@ -11,6 +11,13 @@ class Event < ActiveRecord::Base
     all.where("start_time > ? AND start_time < ?", today, week_later)
   end
 
+  def self.in_month(month_first_day)
+    first = month_first_day
+    last = month_first_day.end_of_month
+    where("start_time BETWEEN ? AND ? OR end_time BETWEEN ? AND ?", first, last, first, last)
+    + where("start_time < ? AND end_time > ?", first, last)
+  end
+
   def start_date_default
     start_time ? start_time.to_date : Date.today
   end

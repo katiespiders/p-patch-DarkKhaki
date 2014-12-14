@@ -69,12 +69,14 @@ module EventsHelper
 
     def table
       """
+        <div class = 'table-responsive'>
         <table class= 'table calendar'>
           <tr> <th colspan='7'> <h3> #{Date::MONTHNAMES[@month]}<h3> </th> </tr>
           <tr> #{days_of_week} </tr>
           #{make_weeks(make_days)}
 
         </table>
+        </div>
       """.html_safe
     end
 
@@ -114,7 +116,7 @@ module EventsHelper
     def events_html(date)
       html = "<ul>"
       Event.by_date(date).each do |event|
-        html += "<li><a href='events/#{event.id}'>#{event.title}</a></li>"
+        html += "<li class='event'><a href='events/#{event.id}'>#{event.title}</a></li>"
       end
       html += "</ul>"
       html.html_safe
