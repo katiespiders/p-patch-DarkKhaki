@@ -13,7 +13,8 @@ class PagesController < ApplicationController
   end
 
   def home
-    @upcoming_events = Event.days_in_future(7)
+    @week_events = Event.days_in_future(7)
+    @month_events = Event.in_month(Date.today)
   end
 
 end
