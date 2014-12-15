@@ -87,7 +87,7 @@ module EventsHelper
     def table
       """
         <table class= 'table calendar table-responsive'>
-          <tr> <th colspan='7'> <h3> #{Date::MONTHNAMES[@month]}<h3> </th> </tr>
+          <tr> <th colspan='7'> <h3 id='event_header'> #{Date::MONTHNAMES[@month]}<h3> </th> </tr>
           <tr> #{days_of_week} </tr>
           #{make_weeks(make_days)}
 

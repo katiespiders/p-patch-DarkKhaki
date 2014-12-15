@@ -15,6 +15,7 @@ class PagesController < ApplicationController
   def home
     @week_events = Event.days_in_future(7)
     @month_events = Event.in_month(Date.today)
+    @articles = Article.all.order("created_at desc").take(3)
   end
 
 end

@@ -14,6 +14,50 @@
  *= require_self
  */
 
+.navbar {
+  border: 3px solid #D8A84C;
+  background-color: #F4CD5B;
+  color: black !important;
+ }
+
+.navbar-brand {
+  padding-left: 30px;
+  color: black !important;
+  font-size: 2em;
+}
+
+.navbar-brand:hover {
+  font-weight: 500;
+}
+ .navbar a {
+  color: black !important;
+ }
+
+.navbar a:hover {
+  font-weight: 800;
+}
+
+body {
+  color: black;
+  background-color: #FFFAA9;
+}
+
+h1, h2, h3, h4 {
+  color: black;
+}
+
+a:visited, a {
+  color: black;
+  font-weight: 500;
+}
+
+.table-hover tr:hover {
+  background-color: #F4CD5B !important;
+}
+
+#weather {
+  margin-left: 30%;
+}
 .weather-pic img {
   height: 100px;
   width: 100px;
@@ -60,6 +104,13 @@ header #weather {
 
 .abt_cont h1 {
   margin: 0;
+}
+
+.about-btn {
+  margin-left: 40%
+}
+.about-btn:hover {
+  background-color: lightgray;
 }
 
 .col {
