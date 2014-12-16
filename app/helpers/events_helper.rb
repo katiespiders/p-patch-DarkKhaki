@@ -8,6 +8,23 @@ module EventsHelper
     Calendar.new(date.month, date.year).table
   end
 
+  def display_month_list(date)
+    events = Event.in_month(date)
+    html = """
+        <h3> #{date.strftime('%B')} Events <h3>
+        <ul class='event_list'>
+        """
+    events.each do |event|
+      html += """
+      <li>
+        #{event.title}
+      </li>
+      """
+    end
+    html += "</ul>"
+    html.html_safe
+  end
+
   def pretty_event_time(event)
     start = event.start_time
     finish = event.end_time
@@ -69,8 +86,8 @@ module EventsHelper
 
     def table
       """
-        <table class= 'table calendar'>
-          <tr> <th colspan='7'> <h3> #{Date::MONTHNAMES[@month]}<h3> </th> </tr>
+        <table class= 'table calendar table-responsive'>
+          <tr> <th colspan='7'> <h3 id='event_header'> #{Date::MONTHNAMES[@month]}<h3> </th> </tr>
           <tr> #{days_of_week} </tr>
           #{make_weeks(make_days)}
 
@@ -114,7 +131,7 @@ module EventsHelper
     def events_html(date)
       html = "<ul>"
       Event.by_date(date).each do |event|
-        html += "<li><a href='events/#{event.id}'>#{event.title}</a></li>"
+        html += "<li class='event'><a href='events/#{event.id}'>#{event.title}</a></li>"
       end
       html += "</ul>"
       html.html_safe

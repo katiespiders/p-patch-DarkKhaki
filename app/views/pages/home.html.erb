@@ -1,0 +1,45 @@
+<div class="row">
+
+  <div class= "col-sm-6">
+    <div id='weather'>
+      <h2> Right Now </h2>
+      <div class="weather-pic"> <%= image_tag weather_icon %> </div>
+      <%= conditions %>, <%= temperature %>&deg; F
+    </div>
+  </div>
+  <div class="col-sm-6 week_events">
+    <h2> This Week's Events </h2>
+      <% @week_events.each do |event| %>
+        <%= render 'shared/event_li', event: event %>
+      <% end %>
+  </div>
+
+
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div id= "full_calendar" >
+      <%= display_calendar(Date.today) %>
+    </div>
+    <div id= "calendar_list">
+      <h3> <%= Date.today.strftime('%B') %> Events </h3>
+        <ul class='event_list'>
+          <% @month_events.each do |event| %>
+            <%= render 'shared/event_li', event: event %>
+          <% end %>
+        </ul>
+    </div>
+  </div>
+</div>
+
+<div class=row>
+  <div class="col-sm-12">
+    <h2> News </h2>
+    <table class="table">
+      <% @articles.each do |article| %>
+      <%= render 'shared/article_preview', article: article %>
+      <% end %>
+    </table>
+  </div>
+</div>

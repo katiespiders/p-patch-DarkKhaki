@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>All articles</title>
+  <title>Community News</title>
 </head>
 
 <body>
-  <h1>All articles</h1>
+  <h1>Community News</h1>
   <%= link_to "Post new article", create_article_path if admin? %>
   <table class="table">
     <% @articles.each do |article| %>
