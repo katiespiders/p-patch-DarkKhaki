@@ -11,10 +11,55 @@
   margin: 0;
 }
 
+#event_header {
+  text-align: center;
+}
+
+#calendar_list h3 {
+  margin-left: 30%;
+}
+
+.week_events {
+  margin-bottom: 20px;
+}
+
 .calendar td {
-  border: 1px solid black;
+
   width: 120px;
   height: 120px;
   padding: 5px;
   margin: 0;
+  border: 3px solid #D8A84C;
+  background-color: #F4CD5B;
+}
+
+.calendar > tbody > tr > th {
+  border: 3px solid #D8A84C;
+  background-color: #F4CD5B;
+
+}
+
+.calendar ul {
+  list-style-type: none;
+
+}
+
+#event li {
+  padding: 0;
+}
+
+@media only screen and (max-width: 700px) {
+  #full_calendar {
+    display: none;
+  }
+  .week_events {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 701px) {
+  #calendar_list {
+    display: none;
+  }
+
 }

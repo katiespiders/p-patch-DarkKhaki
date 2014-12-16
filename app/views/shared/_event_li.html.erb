@@ -1,0 +1,7 @@
+<h4><%= link_to event.title, event_path(event.id) %>
+  <small>
+    <%= link_to "Edit", edit_event_path(event.id) if owner?(current_user) %> <%= link_to "Delete", event_path(event.id), method: :delete if owner?(current_user) %>
+  </small>
+</h4>
+<h5><%= pretty_event_time(event) %></h5>
+<%= event.description %>
