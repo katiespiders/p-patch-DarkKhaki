@@ -2,13 +2,18 @@ require "api_cache"
 require "json"
 
 class Weather
-  attr_accessor :stored_hash
 
   def initialize
     @sun_hash = JSON.parse(APICache.get(astronomy_url))["sun_phase"]
-    @api_hash = JSON.parse(APICache.get(weather_url))
-    @api_hash["sunrise"] = sun_time("sunrise")
-    @api_hash["sunset"] = sun_time("sunset")
+    @current_hash = JSON.parse(APICache.get(weather_url))
+    @current_hash["sunrise"] = sun_time("sunrise")
+    @current_hash["sunset"] = sun_time("sunset")
+
+    @forecast_hash = JSON.parse(APICache.get(forecast_url))["forecast"]["simpleforecast"]["forecastday"]
+  end
+
+  def weather_data
+    @current_hash["current_observation"]
   end
 
   def conditions
@@ -16,11 +21,7 @@ class Weather
   end
 
   def temperature
-    weather_data["temp_f"]
-  end
-
-  def weather_data
-    @api_hash["current_observation"]
+    weather_data["temp_f"].to_i.round
   end
 
   def timestamp
@@ -31,15 +32,15 @@ class Weather
     timestamp.to_date.to_time
   end
 
-  def sun_time(which)
-    hour = @sun_hash[which]["hour"].to_i
-    minute = @sun_hash[which]["minute"].to_i
+  def sun_time(sun_phase)
+    hour = @sun_hash[sun_phase]["hour"].to_i
+    minute = @sun_hash[sun_phase]["minute"].to_i
     timestamp_date + hour.hours + minute.minutes
   end
 
   def daytime?
-    puts "*"*80, "sunrise #{@api_hash['sunrise']}, now #{timestamp}, sunset #{@api_hash['sunset']}"
-    q = (@api_hash["sunrise"] < timestamp) && (timestamp < @api_hash["sunset"])
+    puts "*"*80, "sunrise #{@current_hash['sunrise']}, now #{timestamp}, sunset #{@current_hash['sunset']}"
+    q = (@current_hash["sunrise"] < timestamp) && (timestamp < @current_hash["sunset"])
     puts "="*80, q
     q
   end
@@ -58,12 +59,29 @@ class Weather
     }
   end
 
+  def forecast_array
+    forecast_array = []
+    @forecast_hash.each do |forecast|
+      forecast_array << {
+        date: Time.at(forecast['date']['epoch'].to_i),
+        conditions: forecast['conditions'],
+        image: "http://icons.wxug.com/i/c/c/#{forecast['icon']}"
+      }
+    end
+    forecast_array
+  end
+
+
   def weather_url
     "http://api.wunderground.com/api/#{ENV['WUNDERGROUND_API_KEY']}/conditions/q/WA/Seattle.json"
   end
 
   def astronomy_url
     "http://api.wunderground.com/api/#{ENV['WUNDERGROUND_API_KEY']}/astronomy/q/WA/Seattle.json"
+  end
+
+  def forecast_url
+    "http://api.wunderground.com/api/#{ENV['WUNDERGROUND_API_KEY']}/forecast10day/q/WA/Seattle.json"
   end
 
   def conditions_hash
